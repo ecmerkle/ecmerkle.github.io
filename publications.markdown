@@ -20,7 +20,7 @@ models](https://arxiv.org/abs/1901.05796). *Behavior Research Methods,
 53*, 216--231. (DOI:
 [10.3758/s13428-020-01375-7](https://doi.org/10.3758/s13428-020-01375-7))
 
-### 2019-2020
+### 2019--2020
 
 Merkle, E. C., Saw, G., & Davis-Stober, C. (2020). [Beating the average
 forecast: Regularization based on forecaster
@@ -64,7 +64,7 @@ likelihoods](https://arxiv.org/abs/1802.04452). *Psychometrika, 84*(3),
 802--829. (DOI:
 [10.1007/s11336-019-09679-0](http://dx.doi.org/10.1007/s11336-019-09679-0))
 
-### 2017-2018
+### 2017--2018
 
 Wang, T., & Merkle, E. C. (2018). [Derivative computations and robust
 standard errors for linear mixed effects models in
@@ -124,7 +124,7 @@ data](https://turnermbcn.files.wordpress.com/2017/08/turnerwangmerkle2017.pdf).
 *NeuroImage*, *153*, 28--48. (DOI:
 [10.1016/j.neuroimage.2017.03.044](http://dx.doi.org/10.1016/j.neuroimage.2017.03.044))
 
-### 2015-2016
+### 2015--2016
 
 Merkle, E. C., You, D., & Preacher, K. J. (2016). [Testing non-nested
 structural equation models](http://arxiv.org/pdf/1402.6720v3).
@@ -158,7 +158,7 @@ psychology of intelligence analysis: Drivers of prediction accuracy in
 world politics. *Journal of Experimental Psychology: Applied*, *21*,
 1--14. (DOI: [10.1037/xap0000040](http://dx.doi.org/10.1037/xap0000040))
 
-### 2013-2014
+### 2013--2014
 
 Steyvers, M., Wallsten, T. S., Merkle, E. C., & Turner, B. M. (2014).
 [Evaluating probabilistic forecasts with Bayesian signal detection
@@ -200,7 +200,7 @@ A. (2013). Why do patients derogate physicians who use a computer-based
 diagnostic support system? *Medical Decision Making, 33*, 108-118. (DOI:
 [10.1177/0272989X12453501](http://dx.doi.org/10.1177/0272989X12453501))
 
-### 2011-2012
+### 2011--2012
 
 Shaffer, V. A., Merkle, E. C., Fagerlin, A., Griggs, J. J., Langa, K.
 M., & Iwashyna, T. J. (2012). Chemotherapy was not associated with
