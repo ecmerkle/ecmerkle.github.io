@@ -28,7 +28,7 @@ twitter_username: edgarmerkle
 github_username:  ecmerkle
 
 # Build settings
-theme: minima
+theme: jekyll-theme-time-machine
 plugins:
   - jekyll-feed
 

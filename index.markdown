@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: default
 ---
 
 My research involves a mix of psychometric modeling and the experimentation/modeling that arises from cognitive science and mathematical psychology. Specific research interests include
