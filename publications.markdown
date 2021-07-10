@@ -4,7 +4,7 @@ title: Publications
 permalink: /publications/
 ---
 
-Graves, B. & Merkle, E. C. (in press). [Identification constraints and fit indices in Bayesian latent variable models](https://osf.io/rh9fw/). *Behavior Research Methods*.
+Graves, B. & Merkle, E. C. (in press). [Identification constraints and fit indices in Bayesian latent variable models](https://osf.io/vxtdf/). *Behavior Research Methods*.
 
 Merkle, E. C., Fitzsimmons, E., Uanhoro, J., & Goodrich, B. (in press).
 [Efficient Bayesian structural equation modeling in
