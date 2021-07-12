@@ -116,7 +116,7 @@ potentials. *Social Cognitive and Affective Neuroscience, 12*,
 Merkle, E. C., Steyvers, M., Mellers, B., & Tetlock, P. E. (2017). [A
 neglected dimension of good forecasting judgment: The questions we
 choose also
-matter]({{ site.url }}/pub/MerkleSteyversMellersTetlock2017.pdf).
+matter]({{ site.url }}pub/MerkleSteyversMellersTetlock2017.pdf).
 *International Journal of Forecasting*, *33*, 817--832. (DOI:
 [10.1016/j.ijforecast.2017.04.002](http://dx.doi.org/10.1016/j.ijforecast.2017.04.002))
 
@@ -136,7 +136,7 @@ structural equation models](http://arxiv.org/pdf/1402.6720v3).
 Merkle, E. C., Steyvers, M., Mellers, B., & Tetlock, P. E. (2016). [Item
 response models of probability judgments: Application to a geopolitical
 forecasting
-tournament](http://faculty.missouri.edu/~merklee/pub/MerkleSteyversMellersTetlock2015.pdf).
+tournament]({{ site.url }}pub/MerkleSteyversMellersTetlock2015.pdf).
 *Decision*, *3*, 1--19. (DOI:
 [10.1037/dec0000032](http://dx.doi.org/10.1037/dec0000032))
 
@@ -181,19 +181,19 @@ practice](http://journal.frontiersin.org/Journal/10.3389/fpsyg.2014.00438/abstra
 
 Merkle, E. C., Fan, J., & Zeileis, A. (2014). [Testing for measurement
 invariance with respect to an ordinal
-variable](http://faculty.missouri.edu/~merklee/pub/MerkleFanZeileis2014.pdf).
+variable]({{ site.url }}pub/MerkleFanZeileis2014.pdf).
 *Psychometrika*, *79*, 569--584. (DOI:
 [10.1007/s11336-013-9376-7](http://dx.doi.org/10.1007/s11336-013-9376-7))
 
 Merkle, E. C., & Steyvers, M. (2013). [Choosing a strictly proper
 scoring
-rule](http://faculty.missouri.edu/~merklee/pub/MerkleSteyvers2013.pdf).
+rule]({{ site.url }}pub/MerkleSteyvers2013.pdf).
 *Decision Analysis*, *10*, 292--304. (DOI:
 [10.1287/deca.2013.0280](http://dx.doi.org/10.1287/deca.2013.0280))
 
 Merkle, E. C., & Zeileis, A. (2013). [Tests of measurement invariance
 without subgroups: A generalization of classical
-methods](http://faculty.missouri.edu/~merklee/pub/MerkleZeileis2013.pdf).
+methods]({{ site.url }}pub/MerkleZeileis2013.pdf).
 *Psychometrika*, *78*, 59--82. (DOI:
 [10.1007/s11336-012-9302-4](http://dx.doi.org/10.1007/s11336-012-9302-4))
 
@@ -229,7 +229,7 @@ modeling](http://quantpsy.org/pubs/preacher_merkle_2012.pdf).
 
 Merkle, E. C. (2011). [A comparison of imputation methods for Bayesian
 factor analysis
-models](http://faculty.missouri.edu/~merklee/pub/Merkle2011.pdf).
+models]({{ site.url }}pub/Merkle2011.pdf).
 *Journal of Educational and Behavioral Statistics*, *36*, 257--276.
 (DOI:
 [10.3102/1076998610375833](http://dx.doi.org/10.3102/1076998610375833))
@@ -248,14 +248,14 @@ Educational and Behavioral Statistics*, *36*, 804--831. (DOI:
 
 Merkle, E. C., & Shaffer, V. A. (2011). [Binary recursive partitioning:
 Background, methods, and application to
-psychology](http://faculty.missouri.edu/~merklee/pub/MerkleShaffer2011.pdf).
+psychology]({{ site.url }}pub/MerkleShaffer2011.pdf).
 *British Journal of Mathematical and Statistical Psychology*, *64*,
 161--181. (DOI:
 [10.1348/000711010X503129](http://dx.doi.org/10.1348/000711010X503129))
 
 Merkle, E. C., Smithson, M., & Verkuilen, J. (2011). [Hierarchical
 models of simple mechanisms underlying confidence in decision
-making](http://faculty.missouri.edu/~merklee/pub/MerkleSmithsonVerkuilen2011.pdf).
+making]({{ site.url }}pub/MerkleSmithsonVerkuilen2011.pdf).
 *Journal of Mathematical Psychology*, *55*, 57--67. (DOI:
 [10.1016/j.jmp.2010.08.011](http://dx.doi.org/10.1016/j.jmp.2010.08.011))
 
@@ -263,13 +263,13 @@ making](http://faculty.missouri.edu/~merklee/pub/MerkleSmithsonVerkuilen2011.pdf
 
 Merkle, E. C. (2010). [Calibrating subjective probabilities using
 hierarchical Bayesian
-models](http://faculty.missouri.edu/~merklee/pub/Merkle2010.pdf). In
+models]({{ site.url }}pub/Merkle2010.pdf). In
 S.-K. Chai, J. J. Salerno, & P. L. Mabry (eds.), *Social computing,
 behavioral modeling, and prediction (SBP) 2010* (pp. 13--22).
 Heidelberg: Springer.
 
 Merkle, E. C. (2009). [The disutility of the hard-easy effect in choice
-confidence](http://faculty.missouri.edu/~merklee/pub/Merkle2009.pdf).
+confidence]({{ site.url }}pub/Merkle2009.pdf).
 *Psychonomic Bulletin and Review*, *16*, 204--213. (DOI:
 [10.3758/PBR.16.1.204](http://dx.doi.org/10.3758/PBR.16.1.204))
 
@@ -281,7 +281,7 @@ judgment](http://www.globalcognition.org/wp-content/uploads/2012/03/merkle-jbdm0
 
 Merkle, E. C., Van Zandt, T., & Sieck, W. R. (2008). [Rejoinder: Error
 in confidence
-judgments](http://faculty.missouri.edu/~merklee/pub/MerkleVanZandtSieck2008.pdf).
+judgments]({{ site.url }}pub/MerkleVanZandtSieck2008.pdf).
 *Journal of Behavioral Decision Making*, *21*, 453--456. (DOI:
 [10.1002/bdm.605](http://dx.doi.org/10.1002/bdm.605))
 
