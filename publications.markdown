@@ -116,7 +116,7 @@ potentials. *Social Cognitive and Affective Neuroscience, 12*,
 Merkle, E. C., Steyvers, M., Mellers, B., & Tetlock, P. E. (2017). [A
 neglected dimension of good forecasting judgment: The questions we
 choose also
-matter](http://faculty.missouri.edu/~merklee/pub/MerkleSteyversMellersTetlock2017.pdf).
+matter]({{ site.url }}/pub/MerkleSteyversMellersTetlock2017.pdf).
 *International Journal of Forecasting*, *33*, 817--832. (DOI:
 [10.1016/j.ijforecast.2017.04.002](http://dx.doi.org/10.1016/j.ijforecast.2017.04.002))
 
