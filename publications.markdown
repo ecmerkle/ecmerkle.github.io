@@ -16,6 +16,8 @@ heterogeneity of intervention effects in comparative judgments.
 *Prevention Science*. (DOI:
 [10.1007/s11121-021-01212-z](https://doi.org/10.1007/s11121-021-01212-z))
 
+Garnier-Villareal, M., Merkle, E. C., & Magnus, B. E. (2021). Multidimensional IRT: How far can the estimation methods go? *Psych, 3*, 404--421. (DOI: [10.3390/psych3030029](https://doi.org/10.3390/psych3030029))
+
 Wang, T., Merkle, E. C., Anguera, J., & Turner B. M. (2021).
 [Score-based tests for detecting heterogeneity in linear mixed
 models](https://arxiv.org/abs/1901.05796). *Behavior Research Methods,
