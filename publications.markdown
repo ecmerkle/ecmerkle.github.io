@@ -4,17 +4,19 @@ title: Publications
 permalink: /publications/
 ---
 
-Graves, B. & Merkle, E. C. (in press). [Identification constraints and fit indices in Bayesian latent variable models](https://osf.io/vxtdf/). *Behavior Research Methods*. (DOI: [10.3758/s13428-021-01649-8](https://doi.org/10.3758/s13428-021-01649-8))
+Fife, D. A., Brunwasser, S., & Merkle, E. C. (in press). [Seeing the impossible: Visualizing latent variable models with *flexplavaan*](https://psyarxiv.com/qm7kj). *Psychological Methods*.
 
-Merkle, E. C., Fitzsimmons, E., Uanhoro, J., & Goodrich, B. (in press).
-[Efficient Bayesian structural equation modeling in
-Stan](https://arxiv.org/abs/2008.07733). *Journal of Statistical
-Software*.
+Graves, B. & Merkle, E. C. (in press). [Identification constraints and fit indices in Bayesian latent variable models](https://osf.io/vxtdf/). *Behavior Research Methods*. (DOI: [10.3758/s13428-021-01649-8](https://doi.org/10.3758/s13428-021-01649-8))
 
 Wiedermann, W., Frick, U., & Merkle, E. C. (in press). Detecting
 heterogeneity of intervention effects in comparative judgments.
 *Prevention Science*. (DOI:
 [10.1007/s11121-021-01212-z](https://doi.org/10.1007/s11121-021-01212-z))
+
+Merkle, E. C., Fitzsimmons, E., Uanhoro, J., & Goodrich, B. (2021).
+[Efficient Bayesian structural equation modeling in
+Stan](https://doi.org/10.18637/jss.v100.i06). *Journal of Statistical
+Software, 100*(6), 1--22.
 
 Garnier-Villareal, M., Merkle, E. C., & Magnus, B. E. (2021). Between-item multidimensional IRT: How far can the estimation methods go? *Psych, 3*, 404--421. (DOI: [10.3390/psych3030029](https://doi.org/10.3390/psych3030029))
 
