@@ -4,6 +4,8 @@ title: Publications
 permalink: /publications/
 ---
 
+Wang, T., Graves, B., Rosseel, Y., & Merkle, E. C. (in press). [Computation and application of generalized linear mixed model derivatives using *lme4*](https://arxiv.org/abs/2011.10414). *Psychometrika*.
+
 Fife, D. A., Brunwasser, S., & Merkle, E. C. (in press). [Seeing the impossible: Visualizing latent variable models with *flexplavaan*](https://psyarxiv.com/qm7kj). *Psychological Methods*.
 
 Graves, B. & Merkle, E. C. (in press). [Identification constraints and fit indices in Bayesian latent variable models](https://osf.io/vxtdf/). *Behavior Research Methods*. (DOI: [10.3758/s13428-021-01649-8](https://doi.org/10.3758/s13428-021-01649-8))
