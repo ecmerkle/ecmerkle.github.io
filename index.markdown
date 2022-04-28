@@ -22,4 +22,3 @@ I have published a lot of papers in good journals and have been involved in some
 - [blavaan](https://ecmerkle.github.io/blavaan/)<br/><br/>
 
 
-Note to 2022 prospective PhD students: I am unlikely to accept new PhD students for fall of 2022 because I have a full lab.
