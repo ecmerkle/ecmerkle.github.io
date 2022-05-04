@@ -6,7 +6,7 @@ permalink: /publications/
 
 Wang, T., Graves, B., Rosseel, Y., & Merkle, E. C. (in press). [Computation and application of generalized linear mixed model derivatives using *lme4*](https://arxiv.org/abs/2011.10414). *Psychometrika*. (DOI: [10.1007/s11336-022-09840-2](https://doi.org/10.1007/s11336-022-09840-2))
 
-Debelak, R., Pawel, S., Strobl, C., & Merkle, E. C. (in press). Score-based measurement invariance checks for Bayesian maximum-a-posteriori estimates in item response theory. *British Journal of Mathematical and Statistical Psychology*.
+Debelak, R., Pawel, S., Strobl, C., & Merkle, E. C. (in press). Score-based measurement invariance checks for Bayesian maximum-a-posteriori estimates in item response theory. *British Journal of Mathematical and Statistical Psychology*. (DOI: [10.1111/bmsp.12275](https://doi.org/10.1111/bmsp.12275))
 
 Fife, D. A., Brunwasser, S., & Merkle, E. C. (in press). [Seeing the impossible: Visualizing latent variable models with *flexplavaan*](https://psyarxiv.com/qm7kj). *Psychological Methods*. (DOI: [10.1037/met0000468](https://doi.org/10.1037/met0000468)) 
 
