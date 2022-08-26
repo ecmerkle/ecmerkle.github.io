@@ -172,13 +172,13 @@ world politics. *Journal of Experimental Psychology: Applied*, *21*,
 
 Steyvers, M., Wallsten, T. S., Merkle, E. C., & Turner, B. M. (2014).
 [Evaluating probabilistic forecasts with Bayesian signal detection
-models](http://psiexp.ss.uci.edu/research/papers/Riskanalysis_SteyversWallstenMerkleTurner.pdf).
+models](https://webfiles.uci.edu/msteyver/publications/Riskanalysis_SteyversWallstenMerkleTurner.pdf).
 *Risk Analysis*, *34*, 435--452. (DOI:
 [10.1111/risa.12127](http://dx.doi.org/10.1111/risa.12127))
 
 Turner, B. M., Steyvers, M., Merkle, E. C., Budescu, D. V., & Wallsten,
 T. S. (2014). [Forecast aggregation via
-recalibration](http://psiexp.ss.uci.edu/research/papers/calibrate_paper_final.pdf).
+recalibration](https://webfiles.uci.edu/msteyver/publications/TurnerSteyversMerkleBudescuWallsten2014.pdf).
 *Machine Learning*, *95*, 261--289. (DOI:
 [10.1007/s10994-013-5401-4](http://dx.doi.org/10.1007/s10994-013-5401-4))
 
@@ -244,7 +244,7 @@ models]({{ site.url }}pub/Merkle2011.pdf).
 
 Merkle, E. C., & Steyvers, M. (2011). [A psychological model for
 aggregating judgments of
-magnitude](http://psiexp.ss.uci.edu/research/papers/MerkleSteyvers2011.pdf).
+magnitude](https://webfiles.uci.edu/msteyver/publications/MerkleSteyvers2011.pdf).
 In J. Salerno, S. J. Yang, D. Nau, & S.-K. Chai (eds.), *Social
 computing and behavioral-cultural modeling 2011* (pp. 236--243). Lecture
 Notes in Computer Science 6589.
