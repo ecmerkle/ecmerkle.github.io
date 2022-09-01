@@ -4,9 +4,9 @@ title: Publications
 permalink: /publications/
 ---
 
-Wang, T., Graves, B., Rosseel, Y., & Merkle, E. C. (in press). [Computation and application of generalized linear mixed model derivatives using *lme4*](https://arxiv.org/abs/2011.10414). *Psychometrika*. (DOI: [10.1007/s11336-022-09840-2](https://doi.org/10.1007/s11336-022-09840-2))
-
 Debelak, R., Pawel, S., Strobl, C., & Merkle, E. C. (in press). Score-based measurement invariance checks for Bayesian maximum-a-posteriori estimates in item response theory. *British Journal of Mathematical and Statistical Psychology*. (DOI: [10.1111/bmsp.12275](https://doi.org/10.1111/bmsp.12275))
+
+Flores, R. D., Sanders, C. A., Duan, S. X., Bishop-Chrzanowski, B. M., Oyler, D. L., Shim, H., Clocksin, H. E., Miller, A. P., & Merkle, E. C. (in press). [Before/After Bayes: A Comparison of Frequentist and Bayesian Mixed-Effects Models in Applied Psychological Research](https://osf.io/jz8nw). *British Journal of Psychology*. (DOI: [10.1111/bjop.12585](https://doi.org/10.1111/bjop.12585))
 
 Fife, D. A., Brunwasser, S., & Merkle, E. C. (in press). [Seeing the impossible: Visualizing latent variable models with *flexplavaan*](https://psyarxiv.com/qm7kj). *Psychological Methods*. (DOI: [10.1037/met0000468](https://doi.org/10.1037/met0000468)) 
 
@@ -14,6 +14,8 @@ Wiedermann, W., Frick, U., & Merkle, E. C. (in press). Detecting
 heterogeneity of intervention effects in comparative judgments.
 *Prevention Science*. (DOI:
 [10.1007/s11121-021-01212-z](https://doi.org/10.1007/s11121-021-01212-z))
+
+Wang, T., Graves, B., Rosseel, Y., & Merkle, E. C. (2022). [Computation and application of generalized linear mixed model derivatives using *lme4*](https://arxiv.org/abs/2011.10414). *Psychometrika, 87*, 1173--1193. (DOI: [10.1007/s11336-022-09840-2](https://doi.org/10.1007/s11336-022-09840-2))
 
 Graves, B. & Merkle, E. C. (2022). [Identification constraints and fit indices in Bayesian latent variable models](https://osf.io/vxtdf/). *Behavior Research Methods, 54*, 795--804. (DOI: [10.3758/s13428-021-01649-8](https://doi.org/10.3758/s13428-021-01649-8))
 
