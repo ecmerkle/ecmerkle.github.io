@@ -1,5 +1,5 @@
 ---
-layout: default
+title: "Ed Merkle, University of Missouri"
 ---
 
 My research involves a mix of psychometric modeling and the experimentation/modeling that arises from cognitive science and mathematical psychology. Specific research interests include
@@ -20,5 +20,3 @@ I have published a lot of papers in good journals and have been involved in some
 - [Google scholar](https://scholar.google.com/citations?user=LNVvgwQAAAAJ)
 
 - [blavaan](https://ecmerkle.github.io/blavaan/)<br/><br/>
-
-
