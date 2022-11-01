@@ -3,12 +3,12 @@ project:
   output-dir: docs
 
 website:
-  title: "ecmerkle.github.io"
+  title: "Ed Merkle"
   navbar:
     left:
       - href: index.qmd
         text: Home
-      - about.qmd
+      - publications.qmd
 
 format:
   html:
