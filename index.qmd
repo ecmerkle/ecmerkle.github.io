@@ -17,6 +17,10 @@ I have published a lot of papers in good journals and have been involved in some
 
 - [Code for reproducing results of many papers](http://semtools.r-forge.r-project.org/) (started around 2010, so it is old and looks that way!)
 
+- [GitHub](https://github.com/ecmerkle)
+
 - [Google scholar](https://scholar.google.com/citations?user=LNVvgwQAAAAJ)
 
-- [blavaan](https://ecmerkle.github.io/blavaan/)<br/><br/>
+- [blavaan](https://ecmerkle.github.io/blavaan/)
+
+- [Mastodon](https://mastodon.social/@edgarmerkle)

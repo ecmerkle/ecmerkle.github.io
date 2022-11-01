@@ -4,14 +4,7 @@
     "href": "index.html",
     "title": "Ed Merkle, University of Missouri",
     "section": "",
-    "text": "Bayesian latent variable models\nForecasting and subjective probability: Aggregation, evaluation, crowdsourcing/wisdom of crowds\nPsychometric measurement: Test/item bias and fairness\nStatistical modeling: Estimation, selection, software\n\nI have published a lot of papers in good journals and have been involved in some big-time grants, and my code can be found in some beloved R packages. For papers, see the link at top. You might also look at:\n\nCode for reproducing results of many papers (started around 2010, so it is old and looks that way!)\nGoogle scholar\nblavaan"
-  },
-  {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
-    "section": "",
-    "text": "About this site"
+    "text": "Bayesian latent variable models\nForecasting and subjective probability: Aggregation, evaluation, crowdsourcing/wisdom of crowds\nPsychometric measurement: Test/item bias and fairness\nStatistical modeling: Estimation, selection, software\n\nI have published a lot of papers in good journals and have been involved in some big-time grants, and my code can be found in some beloved R packages. For papers, see the link at top. You might also look at:\n\nCode for reproducing results of many papers (started around 2010, so it is old and looks that way!)\nGitHub\nGoogle scholar\nblavaan\nMastodon"
   },
   {
     "objectID": "publications.html",
