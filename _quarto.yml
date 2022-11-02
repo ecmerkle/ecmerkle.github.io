@@ -9,6 +9,11 @@ website:
       - href: index.qmd
         text: Home
       - publications.qmd
+    right:
+      - icon: mastodon
+        href: https://mastodon.social/@edgarmerkle
+      - icon: github
+        href: https://github.com/ecmerkle
 
 format:
   html:
