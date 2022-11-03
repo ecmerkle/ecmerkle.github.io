@@ -11,7 +11,7 @@ website:
       - publications.qmd
     right:
       - icon: mastodon
-        href: https://mastodon.social/@edgarmerkle
+        href: https://mastodon.sdf.org/@edgarmerkle
       - icon: github
         href: https://github.com/ecmerkle
 
