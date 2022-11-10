@@ -9,6 +9,10 @@ website:
       - href: index.qmd
         text: Home
       - publications.qmd
+      - text: Case Studies
+        menu:
+        - href: cs/ord_ic.qmd
+          text: Ordinal likelihoods
     right:
       - icon: mastodon
         href: https://mastodon.sdf.org/@edgarmerkle
