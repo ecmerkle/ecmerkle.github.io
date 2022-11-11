@@ -21,6 +21,13 @@
     "text": "Conclusions\nFor the model considered here, the adaptive subregion integration method was as good as the gold standard quadrature method and also considerably faster. This is counterintuitive because the quadrature method was integrating over three dimensions, while the subregion method was integrating over nine dimensions. The speed difference probably reflects the methods’ implementations. The quadrature method was coded in R specifically for blavaan models and could be further optimized, whereas the adaptive integration method is coded in Fortran, works for general multivariate normal distributions, and has been developed over decades.\nA limitation of the adaptive subregion integration provided by mnormt is that it cannot handle integration dimensions above 20. So, if your model has over 20 ordinal variables, it is not possible to use the sadmvn() function. In that case, blavaan will revert to importance sampling, which will be slower and potentially less precise (as shown in the example here). An alternative option involves moving to the pmvnorm() function from mvtnorm (Genz et al. 2021), which may handle higher dimensions in some cases. This function is slower than sadmvn() at lower dimensions, though, and we have not compared it to importance sampling at this time. Another option is the tilting method of integrating the multivariate normal, which is found in the TruncatedNormal package (Botev and Belzile 2021). Yet another option is the tlrmvnmvt package (Cao et al. 2022), which includes a fast Genz method that appears to work for higher dimensions than the other packages. These will be further explored in the future."
   },
   {
+    "objectID": "cs/ord_ic.html#acknowledgment",
+    "href": "cs/ord_ic.html#acknowledgment",
+    "title": "Adventures in ordinal model likelihoods",
+    "section": "Acknowledgment",
+    "text": "Acknowledgment\nThis work was made possible through funding from the Institute of Education Sciences, U.S. Department of Education, Grant R305D210044."
+  },
+  {
     "objectID": "cs/ord_ic.html#license",
     "href": "cs/ord_ic.html#license",
     "title": "Adventures in ordinal model likelihoods",

@@ -348,6 +348,8 @@ For the model considered here, the adaptive subregion integration method was as 
 
 A limitation of the adaptive subregion integration provided by *mnormt* is that it cannot handle integration dimensions above 20. So, if your model has over 20 ordinal variables, it is not possible to use the `sadmvn()` function. In that case, *blavaan* will revert to importance sampling, which will be slower and potentially less precise (as shown in the example here). An alternative option involves moving to the `pmvnorm()` function from *mvtnorm* [@genhot21], which may handle higher dimensions in some cases. This function is slower than `sadmvn()` at lower dimensions, though, and we have not compared it to importance sampling at this time. Another option is the tilting method of integrating the multivariate normal, which is found in the *TruncatedNormal* package [@tn21]. Yet another option is the *tlrmvnmvt* package [@tlrmvnmvt], which includes a fast Genz method that appears to work for higher dimensions than the other packages. These will be further explored in the future.
 
+## Acknowledgment
+This work was made possible through funding from the Institute of Education Sciences, U.S. Department of Education, Grant R305D210044.
 
 ## License
 The code on this page is copyrighted by Edgar Merkle and licensed under the GPLv3 license:

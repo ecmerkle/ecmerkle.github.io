@@ -239,6 +239,7 @@ div.csl-indent {
   <li><a href="#likelihood-computations-in-blavaan" id="toc-likelihood-computations-in-blavaan" class="nav-link" data-scroll-target="#likelihood-computations-in-blavaan">Likelihood Computations in blavaan</a></li>
   <li><a href="#implications-for-information-criteria" id="toc-implications-for-information-criteria" class="nav-link" data-scroll-target="#implications-for-information-criteria">Implications for Information Criteria</a></li>
   <li><a href="#conclusions" id="toc-conclusions" class="nav-link" data-scroll-target="#conclusions">Conclusions</a></li>
+  <li><a href="#acknowledgment" id="toc-acknowledgment" class="nav-link" data-scroll-target="#acknowledgment">Acknowledgment</a></li>
   <li><a href="#license" id="toc-license" class="nav-link" data-scroll-target="#license">License</a></li>
   <li><a href="#computing-environment" id="toc-computing-environment" class="nav-link" data-scroll-target="#computing-environment">Computing Environment</a></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
@@ -513,6 +514,10 @@ y_{ij} = 4 &amp;\text{ if }y_{ij}^* &gt;\ \tau_{j3},
 <h2 class="anchored" data-anchor-id="conclusions">Conclusions</h2>
 <p>For the model considered here, the adaptive subregion integration method was as good as the gold standard quadrature method and also considerably faster. This is counterintuitive because the quadrature method was integrating over three dimensions, while the subregion method was integrating over nine dimensions. The speed difference probably reflects the methods’ implementations. The quadrature method was coded in R specifically for <em>blavaan</em> models and could be further optimized, whereas the adaptive integration method is coded in Fortran, works for general multivariate normal distributions, and has been developed over decades.</p>
 <p>A limitation of the adaptive subregion integration provided by <em>mnormt</em> is that it cannot handle integration dimensions above 20. So, if your model has over 20 ordinal variables, it is not possible to use the <code>sadmvn()</code> function. In that case, <em>blavaan</em> will revert to importance sampling, which will be slower and potentially less precise (as shown in the example here). An alternative option involves moving to the <code>pmvnorm()</code> function from <em>mvtnorm</em> <span class="citation" data-cites="genhot21">(<a href="#ref-genhot21" role="doc-biblioref">Genz et al. 2021</a>)</span>, which may handle higher dimensions in some cases. This function is slower than <code>sadmvn()</code> at lower dimensions, though, and we have not compared it to importance sampling at this time. Another option is the tilting method of integrating the multivariate normal, which is found in the <em>TruncatedNormal</em> package <span class="citation" data-cites="tn21">(<a href="#ref-tn21" role="doc-biblioref">Botev and Belzile 2021</a>)</span>. Yet another option is the <em>tlrmvnmvt</em> package <span class="citation" data-cites="tlrmvnmvt">(<a href="#ref-tlrmvnmvt" role="doc-biblioref">Cao et al. 2022</a>)</span>, which includes a fast Genz method that appears to work for higher dimensions than the other packages. These will be further explored in the future.</p>
+</section>
+<section id="acknowledgment" class="level2">
+<h2 class="anchored" data-anchor-id="acknowledgment">Acknowledgment</h2>
+<p>This work was made possible through funding from the Institute of Education Sciences, U.S. Department of Education, Grant R305D210044.</p>
 </section>
 <section id="license" class="level2">
 <h2 class="anchored" data-anchor-id="license">License</h2>
