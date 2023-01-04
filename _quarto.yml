@@ -1,6 +1,9 @@
 project:
   type: website
   output-dir: docs
+  render:
+    - "*.qmd"
+    - "!cs/msem.qmd"
 
 website:
   title: "Ed Merkle"
