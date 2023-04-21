@@ -8,9 +8,9 @@ Wang, T. & Merkle, E. C. (preprint). [Self-normalized, score-based tests of mixe
 
 Fife, D. A., Brunwasser, S., & Merkle, E. C. (in press). [Seeing the impossible: Visualizing latent variable models with *flexplavaan*](https://psyarxiv.com/qm7kj). *Psychological Methods*. (DOI: [10.1037/met0000468](https://doi.org/10.1037/met0000468)) 
 
-Wiedermann, W., Frick, U., & Merkle, E. C. (in press). Detecting
+Wiedermann, W., Frick, U., & Merkle, E. C. (2023). Detecting
 heterogeneity of intervention effects in comparative judgments.
-*Prevention Science*. (DOI:
+*Prevention Science, 24*, 444--454. (DOI:
 [10.1007/s11121-021-01212-z](https://doi.org/10.1007/s11121-021-01212-z))
 
 ### 2021--2022
