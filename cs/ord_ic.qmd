@@ -1,7 +1,10 @@
 ---
 title: "Adventures in ordinal model likelihoods"
 date: "`r format(Sys.time(), '%m/%d/%y')`"
-author: Edgar C. Merkle
+author:
+  - name: Edgar C. Merkle
+    affiliation: University of Missouri
+    orcid: 0000-0001-7158-0653
 citation:
   url: https://ecmerkle.github.io/cs/ord_ic.html
   citation-label: "merkle22"
