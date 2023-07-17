@@ -1,0 +1,39 @@
+# Shared options for posts
+
+# Freeze computed outputs
+freeze: false
+
+# Disable banner style title blocks
+title-block-banner: true
+title-block-style: default
+
+# Enable CC licence appendix
+license: "CC BY"
+
+# Default for table of contents
+toc: true
+toc-title: Contents
+toc-depth: 3
+toc-location: left
+
+# Link sections
+anchor-sections: true
+
+# Default knitr options
+execute:
+  echo: true
+  message: true
+  warning: true
+
+# Default author
+author:
+  - name: Edgar Merkle
+    url: https://ecmerkle.github.io
+    affiliation: University of Missouri
+    affiliation-url: https://psychology.missouri.edu/people/merkle
+    orcid: 0000-0001-7158-0653
+
+# Default fields for citation
+citation: true
+
+google-scholar: true

@@ -2,12 +2,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.1.251">
+<meta name="generator" content="quarto-1.3.433">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Edgar C. Merkle">
-<meta name="dcterms.date" content="2022-11-10">
+<meta name="author" content="Edgar Merkle">
 
 <title>Ed Merkle - Adventures in ordinal model likelihoods</title>
 <style>
@@ -19,9 +18,10 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -48,48 +48,19 @@ pre.numberSource code > span > a:first-child::before
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
     padding: 0 4px; width: 4em;
-    color: #aaaaaa;
   }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
 div.sourceCode
   {   }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+/* CSS for citations */
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
 }
-.hanging div.csl-entry {
+.hanging-indent div.csl-entry {
   margin-left:2em;
   text-indent:-2em;
 }
@@ -103,8 +74,7 @@ div.csl-right-inline {
 }
 div.csl-indent {
   margin-left: 2em;
-}
-</style>
+}</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -139,19 +109,21 @@ div.csl-indent {
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <link rel="stylesheet" href="../styles.css">
 <meta name="citation_title" content="Adventures in ordinal model likelihoods">
-<meta name="citation_author" content="Edgar C. Merkle">
+<meta name="citation_author" content="Edgar Merkle">
 <meta name="citation_publication_date" content="2022-11-10">
 <meta name="citation_cover_date" content="2022-11-10">
 <meta name="citation_year" content="2022">
-<meta name="citation_online_date" content="NaN-NaN-NaN">
+<meta name="citation_online_date" content="2022-11-10">
 <meta name="citation_fulltext_html_url" content="https://ecmerkle.github.io/cs/ord_ic.html">
 <meta name="citation_language" content="en">
 <meta name="citation_reference" content="citation_title=Efficient Bayesian structural equation modeling in Stan;,citation_author=E. C. Merkle;,citation_author=E. Fitzsimmons;,citation_author=J. Uanhoro;,citation_author=B. Goodrich;,citation_publication_date=2021;,citation_cover_date=2021;,citation_year=2021;,citation_fulltext_html_url=https://www.jstatsoft.org/article/view/v100i06;,citation_issue=6;,citation_volume=100;,citation_journal_title=Journal of Statistical Software;">
@@ -192,7 +164,7 @@ div.csl-indent {
 <meta name="citation_reference" content="citation_title=Workflow techniques for the robust use of bayes factors.;,citation_abstract=Inferences about hypotheses are ubiquitous in the cognitive sciences. Bayes factors provide one general way to compare different hypotheses by their compatibility with the observed data. Those quantiﬁcations can then also be used to choose between hypotheses. While Bayes factors provide an immediate approach to hypothesis testing, they are highly sensitive to details of the data/model assumptions and it’s unclear whether the details of the computational implementation (such as bridge sampling) are unbiased for complex analyses. Here, we study how Bayes factors misbehave under different conditions. This includes a study of errors in the estimation of Bayes factors; the ﬁrst-ever use of simulation-based calibration to test the accuracy and bias of Bayes factor estimates using bridge sampling; a study of the stability of Bayes factors against different MCMC draws and sampling variation in the data; and a look at the variability of decisions based on Bayes factors using a utility function. We outline a Bayes factor workﬂow that researchers can use to study whether Bayes factors are robust for their individual analysis. Reproducible code is available from https://osf.io/y354c/.;,citation_author=Daniel J. Schad;,citation_author=Bruno Nicenboim;,citation_author=Paul-Christian Bürkner;,citation_author=Michael Betancourt;,citation_author=Shravan Vasishth;,citation_publication_date=2022-03;,citation_cover_date=2022-03;,citation_year=2022;,citation_fulltext_html_url=http://doi.apa.org/getdoi.cfm?doi=10.1037/met0000472;,citation_doi=10.1037/met0000472;,citation_issn=1939-1463, 1082-989X;,citation_journal_title=Psychological Methods;">
 </head>
 
-<body class="nav-fixed">
+<body class="floating nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -203,22 +175,27 @@ div.csl-indent {
     <span class="navbar-title">Ed Merkle</span>
     </a>
   </div>
+            <div id="quarto-search" class="" title="Search"></div>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../index.html">Home</a>
+    <a class="nav-link" href="../index.html" rel="" target="">
+ <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../publications.html">Publications</a>
+    <a class="nav-link" href="../publications.html" rel="" target="">
+ <span class="menu-text">Publications</span></a>
   </li>  
   <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-case-studies" role="button" data-bs-toggle="dropdown" aria-expanded="false">Case Studies</a>
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-case-studies" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text">Case Studies</span>
+    </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-case-studies">    
         <li>
-    <a class="dropdown-item" href="../cs/ord_ic.html">
+    <a class="dropdown-item" href="../cs/ord_ic.html" rel="" target="">
  <span class="dropdown-text">Ordinal likelihoods</span></a>
   </li>  
     </ul>
@@ -226,28 +203,59 @@ div.csl-indent {
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item compact">
-    <a class="nav-link" href="https://mastodon.sdf.org/@edgarmerkle"><i class="bi bi-mastodon" role="img">
+    <a class="nav-link" href="https://mastodon.sdf.org/(edgarmerkle?)" rel="" target=""><i class="bi bi-mastodon" role="img">
 </i> 
- </a>
+ <span class="menu-text"></span></a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="https://github.com/ecmerkle"><i class="bi bi-github" role="img">
+    <a class="nav-link" href="https://github.com/ecmerkle" rel="" target=""><i class="bi bi-github" role="img">
 </i> 
- </a>
+ <span class="menu-text"></span></a>
   </li>  
 </ul>
-              <div id="quarto-search" class="" title="Search"></div>
+            <div class="quarto-navbar-tools">
+</div>
           </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
     </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Adventures in ordinal model likelihoods</h1>
+                      </div>
+  </div>
+    
+  <div class="quarto-title-meta-author">
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-heading">Affiliation</div>
+    
+      <div class="quarto-title-meta-contents">
+      <p class="author"><a href="https://ecmerkle.github.io">Edgar Merkle</a> <a href="https://orcid.org/0000-0001-7158-0653" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
+    </div>
+      <div class="quarto-title-meta-contents">
+          <p class="affiliation">
+              <a href="https://psychology.missouri.edu/people/merkle">
+              University of Missouri
+              </a>
+            </p>
+        </div>
+      </div>
+
+  <div class="quarto-title-meta">
+
+        
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-<!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Contents</h2>
    
   <ul>
   <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
@@ -263,37 +271,16 @@ div.csl-indent {
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul>
 </nav>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">Adventures in ordinal model likelihoods</h1>
-</div>
+<main class="content quarto-banner-title-block" id="quarto-document-content">
 
 
 
-<div class="quarto-title-meta">
-
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Edgar C. Merkle </p>
-          </div>
-  </div>
-    
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">November 10, 2022</p>
-    </div>
-  </div>
-    
-  </div>
-  
-
-</header>
 
 <p>This page contains information about computing (approximating) likelihoods of structural equation models with ordinal variables. We consider interactions between theoretical results and computational issues, and we also consider the influence of likelihood approximations on information criteria like WAIC. Finally, we discuss how <em>blavaan</em> handles related issues.</p>
 <section id="introduction" class="level3">
@@ -549,13 +536,13 @@ y_{ij} = 4 &amp;\text{ if }y_{ij}^* &gt;\ \tau_{j3},
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>R version 4.2.2 (2022-10-31)
+<pre><code>R version 4.3.1 (2023-06-16)
 Platform: x86_64-pc-linux-gnu (64-bit)
-Running under: Ubuntu 20.04.5 LTS
+Running under: Ubuntu 22.04.2 LTS
 
 Matrix products: default
-BLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.9.0
-LAPACK: /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.9.0
+BLAS:   /usr/lib/x86_64-linux-gnu/atlas/libblas.so.3.10.3 
+LAPACK: /usr/lib/x86_64-linux-gnu/atlas/liblapack.so.3.10.3;  LAPACK version 3.10.0
 
 locale:
  [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
@@ -565,40 +552,42 @@ locale:
  [9] LC_ADDRESS=C               LC_TELEPHONE=C            
 [11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
 
+time zone: America/Chicago
+tzcode source: system (glibc)
+
 attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
-[1] ggplot2_3.4.0       mnormt_2.1.1        tmvnsim_1.0-2      
-[4] future.apply_1.10.0 future_1.29.0       loo_2.5.1          
-[7] blavaan_0.4-4.1001  Rcpp_1.0.9          lavaan_0.6-11      
+[1] ggplot2_3.4.2       mnormt_2.1.1        tmvnsim_1.0-2      
+[4] future.apply_1.11.0 future_1.33.0       loo_2.6.0          
+[7] blavaan_0.4-9.1142  Rcpp_1.0.10         lavaan_0.6-15      
 
 loaded via a namespace (and not attached):
- [1] mvtnorm_1.1-3        lattice_0.20-45      listenv_0.8.0       
- [4] prettyunits_1.1.1    ps_1.7.2             zoo_1.8-11          
- [7] rprojroot_2.0.3      digest_0.6.30        utf8_1.2.2          
-[10] parallelly_1.32.1    R6_2.5.1             nonnest2_0.5-5      
-[13] backports_1.4.1      ggridges_0.5.4       stats4_4.2.2        
-[16] evaluate_0.18        coda_0.19-4          pillar_1.8.1        
-[19] rlang_1.0.6          callr_3.7.3          Matrix_1.5-1        
-[22] checkmate_2.1.0      pbivnorm_0.6.0       rmarkdown_2.17      
-[25] labeling_0.4.2       desc_1.4.2           stringr_1.4.1       
-[28] htmlwidgets_1.5.4    munsell_0.5.0        compiler_4.2.2      
-[31] xfun_0.34            rstan_2.21.7         pkgconfig_2.0.3     
-[34] pkgbuild_1.3.1       globals_0.16.1       rstantools_2.2.0    
-[37] htmltools_0.5.3      tidyselect_1.2.0     tibble_3.1.8        
-[40] gridExtra_2.3        codetools_0.2-18     matrixStats_0.62.0  
-[43] fansi_1.0.3          crayon_1.5.2         dplyr_1.0.10        
-[46] withr_2.5.0          MASS_7.3-58.1        grid_4.2.2          
-[49] jsonlite_1.8.3       gtable_0.3.1         lifecycle_1.0.3     
-[52] magrittr_2.0.3       StanHeaders_2.21.0-7 scales_1.2.1        
-[55] RcppParallel_5.1.5   cli_3.4.1            stringi_1.7.8       
-[58] farver_2.1.1         vctrs_0.5.0          generics_0.1.3      
-[61] sandwich_3.0-2       tools_4.2.2          CompQuadForm_1.4.3  
-[64] glue_1.6.2           processx_3.8.0       pkgload_1.3.1       
-[67] parallel_4.2.2       fastmap_1.1.0        yaml_2.3.6          
-[70] inline_0.3.19        colorspace_2.0-3     bayesplot_1.9.0     
-[73] knitr_1.40          </code></pre>
+ [1] gtable_0.3.3        xfun_0.39           htmlwidgets_1.6.2  
+ [4] processx_3.8.2      inline_0.3.19       CompQuadForm_1.4.3 
+ [7] lattice_0.21-8      callr_3.7.3         quadprog_1.5-8     
+[10] vctrs_0.6.3         tools_4.3.1         ps_1.7.5           
+[13] generics_0.1.3      stats4_4.3.1        parallel_4.3.1     
+[16] sandwich_3.0-2      tibble_3.2.1        fansi_1.0.4        
+[19] pkgconfig_2.0.3     Matrix_1.5-4.1      checkmate_2.2.0    
+[22] desc_1.4.2          RcppParallel_5.1.7  lifecycle_1.0.3    
+[25] farver_2.1.1        compiler_4.3.1      munsell_0.5.0      
+[28] codetools_0.2-19    htmltools_0.5.5     bayesplot_1.10.0   
+[31] yaml_2.3.7          pillar_1.9.0        crayon_1.5.2       
+[34] MASS_7.3-60         StanHeaders_2.26.27 parallelly_1.36.0  
+[37] rstan_2.21.8        tidyselect_1.2.0    digest_0.6.32      
+[40] mvtnorm_1.2-2       listenv_0.9.0       nonnest2_0.5-5     
+[43] dplyr_1.1.2         labeling_0.4.2      rprojroot_2.0.3    
+[46] fastmap_1.1.1       grid_4.3.1          colorspace_2.1-0   
+[49] cli_3.6.1           magrittr_2.0.3      pkgbuild_1.4.2     
+[52] utf8_1.2.3          pbivnorm_0.6.0      withr_2.5.0        
+[55] backports_1.4.1     prettyunits_1.1.1   scales_1.2.1       
+[58] rmarkdown_2.23      globals_0.16.2      matrixStats_1.0.0  
+[61] gridExtra_2.3       zoo_1.8-12          coda_0.19-4        
+[64] evaluate_0.21       knitr_1.43          rstantools_2.3.1   
+[67] rlang_1.1.1         glue_1.6.2          pkgload_1.3.2      
+[70] rstudioapi_0.14     jsonlite_1.8.7      R6_2.5.1           </code></pre>
 </div>
 </div>
 </section>
@@ -609,44 +598,43 @@ loaded via a namespace (and not attached):
 
 </section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
-<div id="ref-albchi93" class="csl-entry" role="doc-biblioentry">
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-albchi93" class="csl-entry" role="listitem">
 Albert, James H., and Siddhartha Chib. 1993. <span>“Bayesian Analysis of Binary and Polychotomous Response Data.”</span> <em>Journal of the American Statistical Association</em> 88 (422): 669–79.
 </div>
-<div id="ref-azzgen20" class="csl-entry" role="doc-biblioentry">
+<div id="ref-azzgen20" class="csl-entry" role="listitem">
 Azzalini, A., and A. Genz. 2020. <em>The <span>R</span> Package <code>mnormt</code>: The Multivariate Normal and <span class="math inline">\(t\)</span> Distributions (Version 2.0.2)</em>. <a href="http://azzalini.stat.unipd.it/SW/Pkg-mnormt/">http://azzalini.stat.unipd.it/SW/Pkg-mnormt/</a>.
 </div>
-<div id="ref-tn21" class="csl-entry" role="doc-biblioentry">
+<div id="ref-tn21" class="csl-entry" role="listitem">
 Botev, Zdravko, and Leo Belzile. 2021. <em>TruncatedNormal: Truncated Multivariate Normal and Student Distributions</em>. <a href="https://CRAN.R-project.org/package=TruncatedNormal">https://CRAN.R-project.org/package=TruncatedNormal</a>.
 </div>
-<div id="ref-tlrmvnmvt" class="csl-entry" role="doc-biblioentry">
+<div id="ref-tlrmvnmvt" class="csl-entry" role="listitem">
 Cao, Jian, Marc G. Genton, David E. Keyes, and George M. Turkiyyah. 2022. <span>“<span class="nocase">tlrmvnmvt</span>: Computing High-Dimensional Multivariate Normal and <span>S</span>tudent-<span class="math inline">\(t\)</span> Probabilities with Low-Rank Methods in <span>R</span>.”</span> <em>Journal of Statistical Software</em> 101 (4): 1–25. <a href="https://doi.org/10.18637/jss.v101.i04">https://doi.org/10.18637/jss.v101.i04</a>.
 </div>
-<div id="ref-chigre98" class="csl-entry" role="doc-biblioentry">
+<div id="ref-chigre98" class="csl-entry" role="listitem">
 Chib, S., and E. Greenberg. 1998. <span>“Analysis of Multivariate Probit Models.”</span> <em>Biometrika</em> 85: 347–61.
 </div>
-<div id="ref-gen92" class="csl-entry" role="doc-biblioentry">
+<div id="ref-gen92" class="csl-entry" role="listitem">
 Genz, A. 1992. <span>“Numerical Computation of the Multivariate Normal Probabilities.”</span> <em>Journal of Computational and Graphical Statistics</em> 1: 141–50.
 </div>
-<div id="ref-genhot21" class="csl-entry" role="doc-biblioentry">
+<div id="ref-genhot21" class="csl-entry" role="listitem">
 Genz, A., F. Bretz, T. Miwa, X. Mi, F. Leisch, F. Scheipl, and T. Hothorn. 2021. <em><span class="nocase">mvtnorm</span>: Multivariate Normal and t Distributions</em>. <a href="https://CRAN.R-project.org/package=mvtnorm">https://CRAN.R-project.org/package=mvtnorm</a>.
 </div>
-<div id="ref-merfit21" class="csl-entry" role="doc-biblioentry">
+<div id="ref-merfit21" class="csl-entry" role="listitem">
 Merkle, E. C., E. Fitzsimmons, J. Uanhoro, and B. Goodrich. 2021. <span>“Efficient <span>Bayesian</span> Structural Equation Modeling in <span>Stan</span>.”</span> <em>Journal of Statistical Software</em> 100 (6): 1–22. <a href="https://www.jstatsoft.org/article/view/v100i06">https://www.jstatsoft.org/article/view/v100i06</a>.
 </div>
-<div id="ref-merfur19" class="csl-entry" role="doc-biblioentry">
+<div id="ref-merfur19" class="csl-entry" role="listitem">
 Merkle, E. C., D. Furr, and S. Rabe-Hesketh. 2019. <span>“<span>Bayesian</span> Comparison of Latent Variable Models: <span>Conditional</span> Versus Marginal Likelihoods.”</span> <em>Psychometrika</em> 84: 802–29. <a href="https://arxiv.org/abs/1802.04452">https://arxiv.org/abs/1802.04452</a>.
 </div>
-</div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{c.merkle2022,
-  author = {Edgar C. Merkle},
-  editor = {},
+</div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div id="quarto-reuse" class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by/4.0/">https://creativecommons.org/licenses/by/4.0/</a></div></div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{merkle2022,
+  author = {Merkle, Edgar},
   title = {Adventures in Ordinal Model Likelihoods},
   date = {2022-11-10},
   url = {https://ecmerkle.github.io/cs/ord_ic.html},
   langid = {en}
 }
-</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-c.merkle2022" class="csl-entry quarto-appendix-citeas" role="doc-biblioentry">
-Edgar C. Merkle. 2022. <span>“Adventures in Ordinal Model
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-merkle2022" class="csl-entry quarto-appendix-citeas" role="listitem">
+Merkle, Edgar. 2022. <span>“Adventures in Ordinal Model
 Likelihoods.”</span> November 10, 2022. <a href="https://ecmerkle.github.io/cs/ord_ic.html">https://ecmerkle.github.io/cs/ord_ic.html</a>.
 </div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -676,9 +664,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
     }
   });
   clipboard.on('success', function(e) {
@@ -690,7 +692,24 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     button.classList.add('code-copy-button-checked');
     var currentTitle = button.getAttribute("title");
     button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
     setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
       button.setAttribute("title", currentTitle);
       button.classList.remove('code-copy-button-checked');
     }, 1000);
@@ -726,24 +745,128 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return note.innerHTML;
     });
   }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
   var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
   for (var i=0; i<bibliorefs.length; i++) {
     const ref = bibliorefs[i];
-    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
-    tippyHover(ref, function() {
-      var popup = window.document.createElement('div');
-      cites.forEach(function(cite) {
-        var citeDiv = window.document.createElement('div');
-        citeDiv.classList.add('hanging-indent');
-        citeDiv.classList.add('csl-entry');
-        var biblioDiv = window.document.getElementById('ref-' + cite);
-        if (biblioDiv) {
-          citeDiv.innerHTML = biblioDiv.innerHTML;
-        }
-        popup.appendChild(citeDiv);
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
       });
-      return popup.innerHTML;
-    });
+    }
   }
 });
 </script>

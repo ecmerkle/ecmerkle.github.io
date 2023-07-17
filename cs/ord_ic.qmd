@@ -1,26 +1,20 @@
 ---
 title: "Adventures in ordinal model likelihoods"
-date: "`r format(Sys.time(), '%m/%d/%y')`"
-author:
-  - name: Edgar C. Merkle
-    affiliation: University of Missouri
-    orcid: 0000-0001-7158-0653
 citation:
   url: https://ecmerkle.github.io/cs/ord_ic.html
   citation-label: "merkle22"
-  issued: "10Nov2022"
+  issued: 2022-11-10
+  available-date: 2022-11-10
 bibliography:
   - ../../blavaan/vignettes/refs.bib
 format: html
-google-scholar: true
-execute:
-  freeze: true
 ---
 
 ```{r include=FALSE}
 set.seed(909)
 
 #library(blavaan, quietly=TRUE)
+library(lavaan)
 pkgload::load_all("~/Projects/blavaan/", export_all = FALSE)
 library(loo)
 library(future.apply)
