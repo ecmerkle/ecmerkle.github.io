@@ -1,7 +1,7 @@
 # Shared options for posts
 
 # Freeze computed outputs
-freeze: false
+freeze: true
 
 # Disable banner style title blocks
 title-block-banner: true
