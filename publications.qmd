@@ -7,9 +7,10 @@ Merkle, E. C. & Flores, R. (preprint). [Forecaster evaluation as model compariso
 
 Wang, T. & Merkle, E. C. (preprint). [Self-normalized, score-based tests of mixed models](https://doi.org/10.48550/arXiv.2302.14275).
 
-Merkle, E. C., Ariyo, O., Winter, S. D., & Garnier-Villarreal, M. (in press). [Opaque prior distributions in Bayesian latent variable models](https://doi.org/10.48550/arXiv.2301.08667). *Methodology*.
-
 Fife, D. A., Brunwasser, S., & Merkle, E. C. (in press). [Seeing the impossible: Visualizing latent variable models with *flexplavaan*](https://psyarxiv.com/qm7kj). *Psychological Methods*. (DOI: [10.1037/met0000468](https://doi.org/10.1037/met0000468)) 
+
+Merkle, E. C., Ariyo, O., Winter, S. D., & Garnier-Villarreal, M. (2023). [Opaque prior distributions in Bayesian latent variable models](https://doi.org/10.48550/arXiv.2301.08667). *Methodology, 19*, 228--255. (DOI: [10.5964/meth.11167
+](https://doi.org/10.5964/meth.11167))
 
 Wiedermann, W., Frick, U., & Merkle, E. C. (2023). Detecting
 heterogeneity of intervention effects in comparative judgments.
