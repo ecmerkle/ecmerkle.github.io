@@ -1,5 +1,14 @@
 ---
 title: "Adventures in ordinal model likelihoods"
+description: |
+  This case study provides information about computing (approximating) likelihoods of structural equation models with ordinal variables. We consider interactions between theoretical results and computational issues, and we also consider the influence of likelihood approximations on information criteria like WAIC. Finally, we discuss how *blavaan* handles related issues.
+date: 2022-11-10
+categories:
+  - statistics
+  - multivariate probit models
+  - structural equation models
+  - R
+  - blavaan
 citation:
   url: https://ecmerkle.github.io/cs/ord_ic.html
   citation-label: "merkle22"
