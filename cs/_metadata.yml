@@ -27,7 +27,9 @@ execute:
 
 # Default author
 author:
-  - name: Edgar Merkle
+  - name:
+      given: Edgar C.
+      family: Merkle
     url: https://ecmerkle.github.io
     affiliation: University of Missouri
     affiliation-url: https://psychology.missouri.edu/people/merkle
