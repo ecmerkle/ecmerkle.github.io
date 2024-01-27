@@ -1,0 +1,16 @@
+---
+title: "Consulting & Collaboration"
+---
+
+I have been in a variety of consulting and collaborative projects spanning across academia and industry. Some of these projects are hourly, while others may involve a role on a grant. I limit the number of projects in which I am involved, so that I can devote sufficient attention to each project.
+
+Topics that especially interest me are listed below. If you have a need related to these topics, feel free to contact me (ecmerkle) at gmail.com. This list is not exhaustive, so also feel free to inquire about other projects.
+
+- Support and troubleshooting for the *blavaan* R package, and related latent variable/multilevel/SEM approaches.
+
+- Support/workflow for general Bayesian modeling and software.
+
+- Support/workflow for other statistical efforts, especially involving R.
+
+- Automated report/document generation.
+

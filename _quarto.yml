@@ -16,6 +16,7 @@ website:
         menu:
         - href: cs/ord_ic.qmd
           text: Ordinal likelihoods
+      - text: Consulting
     right:
       - icon: mastodon
         href: https://mastodon.sdf.org/@edgarmerkle
