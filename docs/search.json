@@ -51,7 +51,7 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "Ed Merkle\nPsychometrics/Statistics/Computing/Quantitative Psychology",
+    "title": "Ed Merkle\nPsychometrics/Statistics/Computing/\nQuantitative Psychology",
     "section": "",
     "text": "My research involves a mix of psychometric modeling, statistical modeling, and the experimentation/modeling that arises from cognitive science and mathematical psychology. Specific research interests include\n\nBayesian latent variable models\nForecasting and subjective probability: Aggregation, evaluation, crowdsourcing/wisdom of crowds\nPsychometric measurement: Test/item bias and fairness\nStatistical modeling: Estimation, selection, software\n\nI am currently a professor at the University of Missouri, with primary affiliation in the Department of Psychological Sciences and adjunct affiliation in the Department of Statistics. I have published some papers in good journals and been involved in some big grants, and my code can be found in some beloved R packages. For papers, see the link at top. You might also look at:\n\nCode for reproducing results of many papers (started around 2010, so it is old and looks that way!)\nGoogle scholar\nblavaan"
   }
