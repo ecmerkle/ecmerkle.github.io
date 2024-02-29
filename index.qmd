@@ -1,9 +1,5 @@
----
-title: |
-  | Ed Merkle
-  | Psychometrics/Statistics/Computing/
-  | Quantitative Psychology
----
+
+# Ed Merkle: Psychometrics/Statistics/Computing/Quantitative Psychology
 
 My research involves a mix of psychometric modeling, statistical modeling, and the experimentation/modeling that arises from cognitive science and mathematical psychology. Specific research interests include
 

@@ -16,6 +16,8 @@ website:
         menu:
         - href: cs/ord_ic.qmd
           text: Ordinal likelihoods
+        - href: cs/targets.qmd
+          text: targets package
       - href: consult.qmd
         text: Consulting
     right:

@@ -1,0 +1,98 @@
+---
+title: "The *targets* package for academic research"
+description: |
+  This document provides an example of how the *targets* package can benefit academic projects, where the goal is to write a journal article or related report. It illustrates how *targets* works better than caches in Rmarkdown and knitr, and it provides a brief discussion of how to get started.
+date: 2024-02-29
+categories:
+  - pipelines
+  - targets
+  - statistics
+  - R
+citation:
+  url: https://ecmerkle.github.io/cs/targets.html
+  citation-label: "merkle24"
+  issued: 2024-02-29
+  available-date: 2024-02-29
+bibliography:
+  - ../../blavaan/vignettes/refs.bib
+format: html
+---
+
+```{r include=FALSE}
+set.seed(909)
+
+library(targets)
+```
+
+I heard about the *targets* package [@targets] a few times in the past, the most notable being [Will Landau's presentation at StanCon 2023.](https://wlandau.github.io/stantargets-talk) As an academic researcher whose projects often lead to journal articles, I did not immediately see the advantage of *targets* over dynamic report generation packages like Rmarkdown and knitr. This case study illustrates how *targets* provides useful features that cannot be handled by dynamic report generation alone.
+
+
+## Illustrating the Cache Problem
+The [*targets* overview vignette](https://cran.r-project.org/web/packages/targets/vignettes/overview.html) states that the package "reduces the burdens of repeated computation and manual data micromanagement." To me, that sounded similar to using Rmarkdown with `cache = TRUE`: I cache the results when I compile the Rmarkdown document, so that I do not have to repeatedly run the same computations.
+
+But the catch is that the Rmarkdown cache is not intelligent, in the sense that it cannot tell when a change to one code chunk influences another code chunk. This leads to cached results that are stale, in the sense the the cached results no longer match what would happen if you re-ran the entire Rmarkdown document from scratch.
+
+To see what I mean, consider the following three code chunks that could plausibly appear in an Rmarkdown file:
+
+````
+```{{r}}
+set.seed(311)
+x <- 1:10
+y <- x + rnorm(10, sd = .5)
+```
+
+```{{r, out.height = "2.5in", fig.align = "center"}}
+plot(x, y)
+```
+
+```{{r, cache = TRUE}}
+summary(lm(y ~ x))
+```
+````
+
+Notice that the third chunk is cached, while the other two chunks are not.
+
+Imagine that I compile these three code chunks to pdf or docx or some other format. Then I do extra editing and discover that I am missing a negative sign in my first code chunk; that chunk should actually be:
+
+```{{r}}
+set.seed(311)
+x <- 1:10
+y <- -x + rnorm(10, sd = .5)
+```
+
+When I make this change and recompile, the plot will be updated but not the regression summary. This is because the chunk containing the regression summary was already cached.
+
+
+## Solution
+At this point, you might say that I was stupid to cache the regression summary, if it was possible for the data to change in the future. That is true, but for larger documents with many code chunks (like journal articles), it is difficult to anticipate what may change in the future, because data and analyses might be added and removed over the life of a project. We could decide to never cache anything, but then it can take a really long time to compile the document. It is better to have a system that will re-run code only when needed, and this is where *targets* helps.
+
+
+## Getting Started
+[The *targets* walkthrough](https://books.ropensci.org/targets/walkthrough.html) is helpful and illustrates the general process for using *targets* with your project. But for academic documents, the one thing missing from the walkthrough is the ability to funnel your results into an Rmd or Rnw file. This missing functionality is found in the `tar_render()` function from the *tarchetypes* package [@tarchetypes], and an example of how to use it is [at this link.](https://github.com/ropensci/tarchetypes?tab=readme-ov-file#literate-programming) The `tar_render()` function allows you to pass results to an Rmd file for automatic document generation. And when there are changes to the project, *targets* will know what things need to be re-run and what things don't need to be re-run.
+
+
+## Conclusion
+A good deal of recent attention has been devoted to errors in academic articles. While the focus is often on statistical methodology, cheating, and experimental design, a more mundane source of errors involves outdated and incoherent results. These happen when one part of a project changes, the changes have further implications for downstarem results, and the researcher doesn't fully realize or address the further implications. I speculate that these mundane errors are common because, when the goal is to publish as quickly as possible, errors are bound to slip through the cracks. In this context, we could view *targets* as an extra research assistant who double-checks that all project results are up to date.
+
+Like other software tools, you have to invest some time in setting up *targets* for a project. You need to create the `_targets.R` file, which defines all the targets/steps of one's project. I also found it helpful to put free-standing code inside functions so that the code can be called more easily. These extra steps will undoubtedly deter some researchers from regularly using *targets*, and it may not be worth it for some short-term analyses. But the *targets* setup is like compounding interest for project efficiency, making your life easier as the project drags on through journal submissions, rejections, revisions, and resubmissions.
+
+
+## License
+The code on this page is copyrighted by Edgar Merkle and licensed under the GPLv3 license:
+
+[https://www.gnu.org/licenses/gpl-3.0.en.html](https://www.gnu.org/licenses/gpl-3.0.en.html)
+
+The text and figures on this page are copyrighted by Edgar Merkle and licensed under the CC BY-NC 4.0 license:
+
+[https://creativecommons.org/licenses/by-nc/4.0/](https://creativecommons.org/licenses/by-nc/4.0/)
+
+
+## Computing Environment
+
+```{r cenv}
+sessionInfo()
+```
+
+
+## References
+
