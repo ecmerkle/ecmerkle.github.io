@@ -4,6 +4,7 @@ project:
   render:
     - "*.qmd"
     - "!cs/msem.qmd"
+    - "!cs/propodds.qmd"
 
 website:
   title: "Ed Merkle"
