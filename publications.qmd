@@ -207,7 +207,7 @@ Merkle, E. C., & Steyvers, M. (2013). [Choosing a strictly proper
 scoring
 rule](pub/MerkleSteyvers2013.pdf).
 *Decision Analysis*, *10*, 292--304. (DOI:
-[10.1287/deca.2013.0280](http://dx.doi.org/10.1287/deca.2013.0280))
+[10.1287/deca.2013.0280](http://dx.doi.org/10.1287/deca.2013.0280)) [included among the journal's most cited articles](https://pubsonline.informs.org/page/deca/deca-at-20)
 
 Merkle, E. C., & Zeileis, A. (2013). [Tests of measurement invariance
 without subgroups: A generalization of classical
