@@ -5,7 +5,7 @@ title: "Publications"
 
 Wang, T. & Merkle, E. C. (preprint). [Self-normalized, score-based tests of mixed models](https://doi.org/10.48550/arXiv.2302.14275).
 
-Merkle, E. C. & Flores, R. (in press). [Forecaster evaluation as model comparison](https://osf.io/n5czv/). *Decision*.
+Merkle, E. C. & Flores, R. (in press). [Forecaster evaluation as model comparison](https://osf.io/n5czv/). *Decision*. (DOI: [10.1037/dec0000230](https://doi.org/10.1037/dec0000230)
 
 Fife, D. A., Brunwasser, S., & Merkle, E. C. (2023). [Seeing the impossible: Visualizing latent variable models with *flexplavaan*](https://psyarxiv.com/qm7kj). *Psychological Methods, 28*, 1456--1477. (DOI: [10.1037/met0000468](https://doi.org/10.1037/met0000468)) 
 
