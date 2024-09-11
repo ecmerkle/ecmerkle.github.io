@@ -24,8 +24,6 @@ website:
     right:
       - icon: mastodon
         href: https://mastodon.sdf.org/@edgarmerkle
-      - icon: bluesky
-        href: https://bsky.app/profile/edgarmerkle.bsky.social
       - icon: github
         href: https://github.com/ecmerkle
 

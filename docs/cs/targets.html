@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.537">
+<meta name="generator" content="quarto-1.5.57">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -10,7 +10,7 @@
 <meta name="dcterms.date" content="2024-02-29">
 <meta name="description" content="This document provides an example of how the targets package can benefit academic projects, where the goal is to write a journal article or related report. It illustrates how targets works better than caches in Rmarkdown and knitr, and it provides a brief discussion of how to get started.">
 
-<title>Ed Merkle - The targets package for academic research</title>
+<title>The targets package for academic research – Ed Merkle</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -36,7 +36,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -149,9 +149,9 @@ div.csl-indent {
 <meta name="citation_reference" content="citation_title=Bayesian analysis of binary and polychotomous response data;,citation_author=James H. Albert;,citation_author=Siddhartha Chib;,citation_publication_date=1993;,citation_cover_date=1993;,citation_year=1993;,citation_issue=422;,citation_volume=88;,citation_journal_title=Journal of the American Statistical Association;">
 <meta name="citation_reference" content="citation_title=Adapting Fit Indices for Bayesian Structural Equation Modeling: Comparison to Maximum Likelihood;,citation_author=Mauricio Garnier-Villarreal;,citation_author=Terrence D Jorgensen;,citation_publication_date=2020;,citation_cover_date=2020;,citation_year=2020;,citation_issue=1;,citation_doi=dx.doi.org/10.1037/met0000224;,citation_volume=25;,citation_journal_title=Psychological Methods;">
 <meta name="citation_reference" content="citation_title=Numerical computation of the multivariate normal probabilities;,citation_author=A. Genz;,citation_publication_date=1992;,citation_cover_date=1992;,citation_year=1992;,citation_volume=1;,citation_journal_title=Journal of Computational and Graphical Statistics;">
-<meta name="citation_reference" content="citation_title=The R package mnormt: The multivariate normal and t distributions (version 2.0.2);,citation_author=A. Azzalini;,citation_author=A. Genz;,citation_publication_date=2020;,citation_cover_date=2020;,citation_year=2020;,citation_fulltext_html_url=http://azzalini.stat.unipd.it/SW/Pkg-mnormt/;">
+<meta name="citation_reference" content="citation_title=The R package mnormt: The multivariate normal and $t$ distributions (version 2.0.2);,citation_author=A. Azzalini;,citation_author=A. Genz;,citation_publication_date=2020;,citation_cover_date=2020;,citation_year=2020;,citation_fulltext_html_url=http://azzalini.stat.unipd.it/SW/Pkg-mnormt/;">
 <meta name="citation_reference" content="citation_title=mvtnorm: Multivariate normal and t distributions;,citation_author=A. Genz;,citation_author=F. Bretz;,citation_author=T. Miwa;,citation_author=X. Mi;,citation_author=F. Leisch;,citation_author=F. Scheipl;,citation_author=T. Hothorn;,citation_publication_date=2021;,citation_cover_date=2021;,citation_year=2021;,citation_fulltext_html_url=https://CRAN.R-project.org/package=mvtnorm;">
-<meta name="citation_reference" content="citation_title=tlrmvnmvt: Computing high-dimensional multivariate normal and Student-t probabilities with low-rank methods in R;,citation_author=Jian Cao;,citation_author=Marc G. Genton;,citation_author=David E. Keyes;,citation_author=George M. Turkiyyah;,citation_publication_date=2022;,citation_cover_date=2022;,citation_year=2022;,citation_issue=4;,citation_doi=10.18637/jss.v101.i04;,citation_volume=101;,citation_journal_title=Journal of Statistical Software;">
+<meta name="citation_reference" content="citation_title=tlrmvnmvt: Computing high-dimensional multivariate normal and Student-$t$ probabilities with low-rank methods in R;,citation_author=Jian Cao;,citation_author=Marc G. Genton;,citation_author=David E. Keyes;,citation_author=George M. Turkiyyah;,citation_publication_date=2022;,citation_cover_date=2022;,citation_year=2022;,citation_issue=4;,citation_doi=10.18637/jss.v101.i04;,citation_volume=101;,citation_journal_title=Journal of Statistical Software;">
 <meta name="citation_reference" content="citation_title=Model Modification in Covariance Structure Analysis: Application of the Expected Parameter Change Statistic;,citation_author=David Kaplan;,citation_publication_date=1989;,citation_cover_date=1989;,citation_year=1989;,citation_fulltext_html_url=http://www.tandfonline.com/doi/abs/10.1207/s15327906mbr2403_2;,citation_issue=3;,citation_doi=10.1207/s15327906mbr2403_2;,citation_issn=0027-3171, 1532-7906;,citation_volume=24;,citation_journal_title=Multivariate Behavioral Research;">
 <meta name="citation_reference" content="citation_title=Fit Indexes, Lagrange Multipliers, Constraint Changes and Incomplete Data in Structural Models;,citation_author=P. M. Bentler;,citation_publication_date=1990;,citation_cover_date=1990;,citation_year=1990;,citation_fulltext_html_url=http://www.tandfonline.com/doi/abs/10.1207/s15327906mbr2502_3;,citation_issue=2;,citation_doi=10.1207/s15327906mbr2502_3;,citation_issn=0027-3171, 1532-7906;,citation_volume=25;,citation_journal_title=Multivariate Behavioral Research;">
 <meta name="citation_reference" content="citation_title=Using the Modification Index and Standardized Expected Parameter Change for Model Modification;,citation_author=Tiffany A. Whittaker;,citation_publication_date=2012;,citation_cover_date=2012;,citation_year=2012;,citation_fulltext_html_url=http://www.tandfonline.com/doi/abs/10.1080/00220973.2010.531299;,citation_issue=1;,citation_doi=10.1080/00220973.2010.531299;,citation_issn=0022-0973, 1940-0683;,citation_volume=80;,citation_journal_title=The Journal of Experimental Education;">
@@ -165,7 +165,7 @@ div.csl-indent {
 <meta name="citation_reference" content="citation_title=brms: An R package for Bayesian multilevel models using Stan;,citation_author=Paul-Christian Bürkner;,citation_publication_date=2017;,citation_cover_date=2017;,citation_year=2017;,citation_issue=1;,citation_doi=10.18637/jss.v080.i01;,citation_volume=80;,citation_journal_title=Journal of Statistical Software;">
 <meta name="citation_reference" content="citation_title=Statistical rethinking: A Bayesian course with examples in R and Stan;,citation_author=Richard McElreath;,citation_publication_date=2020;,citation_cover_date=2020;,citation_year=2020;,citation_isbn=978-0-367-13991-9;,citation_series_title=CRC texts in statistical science;">
 <meta name="citation_reference" content="citation_title=The Bayesian New Statistics: Hypothesis testing, estimation, meta-analysis, and power analysis from a Bayesian perspective;,citation_author=John K. Kruschke;,citation_author=Torrin M. Liddell;,citation_publication_date=2018-02;,citation_cover_date=2018-02;,citation_year=2018;,citation_fulltext_html_url=http://link.springer.com/10.3758/s13423-016-1221-4;,citation_issue=1;,citation_doi=10.3758/s13423-016-1221-4;,citation_issn=1069-9384, 1531-5320;,citation_volume=25;,citation_journal_title=Psychonomic Bulletin &amp;amp;amp; Review;">
-<meta name="citation_reference" content="citation_title=Rank-Normalization, Folding, and Localization: An Improved \widehat{R} for Assessing Convergence of MCMC (with Discussion);,citation_author=Aki Vehtari;,citation_author=Andrew Gelman;,citation_author=Daniel Simpson;,citation_author=Bob Carpenter;,citation_author=Paul-Christian Bürkner;,citation_publication_date=2021;,citation_cover_date=2021;,citation_year=2021;,citation_fulltext_html_url=https://doi.org/10.1214/20-BA1221;,citation_issue=2;,citation_doi=10.1214/20-BA1221;,citation_volume=16;,citation_journal_title=Bayesian Analysis;,citation_publisher=International Society for Bayesian Analysis;">
+<meta name="citation_reference" content="citation_title=Rank-Normalization, Folding, and Localization: An Improved $\widehat{R}$ for Assessing Convergence of MCMC (with Discussion);,citation_author=Aki Vehtari;,citation_author=Andrew Gelman;,citation_author=Daniel Simpson;,citation_author=Bob Carpenter;,citation_author=Paul-Christian Bürkner;,citation_publication_date=2021;,citation_cover_date=2021;,citation_year=2021;,citation_fulltext_html_url=https://doi.org/10.1214/20-BA1221;,citation_issue=2;,citation_doi=10.1214/20-BA1221;,citation_volume=16;,citation_journal_title=Bayesian Analysis;,citation_publisher=International Society for Bayesian Analysis;">
 <meta name="citation_reference" content="citation_title=Asymptotic equivalence of bayes cross validation and widely applicable information criterion in singular learning theory;,citation_author=Sumio Watanabe;,citation_publication_date=2010;,citation_cover_date=2010;,citation_year=2010;,citation_volume=11;,citation_journal_title=Journal of Machine Learning Research;">
 <meta name="citation_reference" content="citation_title=Practical Bayesian model evaluation using leave-one-out cross-validation and WAIC;,citation_author=Aki Vehtari;,citation_author=Andrew Gelman;,citation_author=Jonah Gabry;,citation_publication_date=2017;,citation_cover_date=2017;,citation_year=2017;,citation_issue=5;,citation_doi=10.1007/s11222-016-9696-4;,citation_volume=27;,citation_journal_title=Statistics and Computing;">
 <meta name="citation_reference" content="citation_title=A review of issues about null hypothesis Bayesian testing.;,citation_author=Jorge N. Tendeiro;,citation_author=Henk A. L. Kiers;,citation_publication_date=2019-12;,citation_cover_date=2019-12;,citation_year=2019;,citation_fulltext_html_url=http://doi.apa.org/getdoi.cfm?doi=10.1037/met0000221;,citation_issue=6;,citation_doi=10.1037/met0000221;,citation_issn=1939-1463, 1082-989X;,citation_volume=24;,citation_journal_title=Psychological Methods;">
@@ -187,7 +187,7 @@ div.csl-indent {
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
@@ -201,7 +201,7 @@ div.csl-indent {
 <span class="menu-text">Publications</span></a>
   </li>  
   <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-case-studies" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-case-studies" role="link" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">Case Studies</span>
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-case-studies">    
@@ -227,18 +227,13 @@ div.csl-indent {
 <span class="menu-text"></span></a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="https://bsky.app/profile/edgarmerkle.bsky.social"> <i class="bi bi-bluesky" role="img">
-</i> 
-<span class="menu-text"></span></a>
-  </li>  
-  <li class="nav-item compact">
     <a class="nav-link" href="https://github.com/ecmerkle"> <i class="bi bi-github" role="img">
 </i> 
 <span class="menu-text"></span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
-          <div class="quarto-navbar-tools">
+            <div class="quarto-navbar-tools">
 </div>
       </div> <!-- /container-fluid -->
     </nav>
@@ -311,7 +306,7 @@ div.csl-indent {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
     </div>
 <!-- main -->
 <main class="content quarto-banner-title-block" id="quarto-document-content">
@@ -471,18 +466,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -514,7 +498,47 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
   function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
@@ -549,7 +573,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
     });
   }
   const xrefs = window.document.querySelectorAll('a.quarto-xref');
@@ -597,7 +625,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      return note.innerHTML;
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
     }
   }
   for (var i=0; i<xrefs.length; i++) {
