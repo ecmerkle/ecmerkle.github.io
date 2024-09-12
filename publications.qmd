@@ -255,7 +255,7 @@ models](pub/Merkle2011.pdf).
 
 Merkle, E. C., & Steyvers, M. (2011). [A psychological model for
 aggregating judgments of
-magnitude](https://webfiles.uci.edu/msteyver/publications/MerkleSteyvers2011.pdf).
+magnitude](https://mstrep.s3.amazonaws.com/publications/MerkleSteyvers2011.pdf).
 In J. Salerno, S. J. Yang, D. Nau, & S.-K. Chai (eds.), *Social
 computing and behavioral-cultural modeling 2011* (pp. 236--243). Lecture
 Notes in Computer Science 6589.
