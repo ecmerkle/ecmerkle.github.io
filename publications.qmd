@@ -1,5 +1,10 @@
 ---
 title: "Publications"
+resources:
+  - "pub/merkle_ncme24.pdf"
+  - "pub/merkle_ncme24.R"
+  - "pub/Merkle_msu21.pdf"
+  - "pub/merkle_oslo_script.R"
 ---
 
 
