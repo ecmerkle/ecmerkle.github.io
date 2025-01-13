@@ -9,10 +9,13 @@ resources:
 
 <!-- the above resources keep the files on the site, otherwise they are erased because they are only referred to in the blavaan repo -->
 
+Merkle, E. C., Winter, S. D., & Fitzsimmons, E. (preprint). [Identification and scaling of latent variables in ordinal factor analysis](https://arxiv.org/abs/2501.06094).
 
 Merkle, E. C., Petrov, N., Zhu, S. M., Karger, E., Tetlock, P. E., & Himmelstein, M. (preprint). [Identifying good forecasters via adaptive cognitive tests](https://arxiv.org/abs/2411.11126).
 
 Merkle, E. C. & Flores, R. (in press). [Forecaster evaluation as model comparison](https://osf.io/n5czv/). *Decision*. (DOI: [10.1037/dec0000230](https://doi.org/10.1037/dec0000230))
+
+### 2023--2024
 
 Wang, T. & Merkle, E. C. (2024). [Self-normalized, score-based tests of parameter heterogeneity in mixed models](https://doi.org/10.48550/arXiv.2302.14275). In Stemmler, Wiedermann, & Huang (Eds) *Dependent Data in Social Sciences Research* (pp. 377--395). Springer. (DOI: [10.1007/978-3-031-56318-8_15](https://doi.org/10.1007/978-3-031-56318-8_15))
 
