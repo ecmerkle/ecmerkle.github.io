@@ -4,7 +4,6 @@ project:
   render:
     - "*.qmd"
     - "!cs/msem.qmd"
-    - "!cs/propodds.qmd"
 
 website:
   title: "Ed Merkle"
@@ -19,6 +18,8 @@ website:
           text: Ordinal likelihoods
         - href: cs/targets.qmd
           text: targets package
+        - href: cs/propodds.qmd
+          text: Proportional odds
       - href: consult.qmd
         text: Consulting
     right:

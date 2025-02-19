@@ -1,0 +1,98 @@
+---
+title: "The proportional odds restriction"
+description: |
+  Ordinal regression models often employ a proportional odds restriction, which roughly means that the effect of moving from one ordinal category to the next is constant. Here, we provide an example of a model with a predictor that has opposite effects depending on the ordinal categories in question. The example helps provide intuition for what the proportional odds restriction does and why we might consider avoiding it. The example originally appeared in @smimer13.
+date: 2025-02-20
+categories:
+  - ordinal regression
+  - proportional odds
+  - statistics
+  - R
+  - VGAM
+citation:
+  url: https://ecmerkle.github.io/cs/propodds.html
+  citation-label: "merkle25"
+  issued: 2025-02-20
+  available-date: 2025-02-20
+bibliography:
+  - ../../blavaan/vignettes/refs.bib
+format: html
+---
+
+```{r include=FALSE}
+set.seed(909)
+```
+
+Long ago when I was an assistant professor, I co-authored a [book about generalized linear models](https://www.routledge.com/Generalized-Linear-Models-for-Categorical-and-Continuous-Limited-Dependent/Smithson-Merkle/p/book/9781466551732). The book discusses non-normal linear models, including logistic regression, ordinal regression, and beta regression. In this post, I pull my favorite data example from the book and discuss it. I continue to like it because it helps illustrate the implications of proportional odds regression in an intuitive manner.
+
+## Ordinal Regression
+There are a few popular varieties of ordinal regression models, with @burvuo19 providing a good summary. Around the time I co-authored the book, I found @ful09 to be very enlightening. A key idea is that, across all the ordinal regression models, you are predicting the log odds of something. The "something" that you are predicting determines the type of model. We have:
+
+- Cumulative model: Predict the log odds of being above some point $k$ on the ordinal scale.
+- Adjacent model: Predict the log odds of being at point $k$, given that you are either at point $k$ or point $(k-1)$.
+- Stage model: Predict the log odds of being at point $k$, given that you are at point $k$ or higher.
+
+Regardless of the type of model, it is a regression, so there are linear equations on the log odds. Notice that *equations* is plural because, for an ordinal variable, there will be multiple regression equations. For example, imagine we have a cumulative model with one predictor variable and a 3-category  ordinal outcome. Then we have two regression equations:
+\begin{align*}
+\log \left (\frac{P(y > 1)}{P(y = 1)} \right) &= \alpha_1 + \beta_{1} x \\
+\log \left (\frac{P(y > 2)}{P(y \leq 2)} \right) &= \alpha_2 + \beta_{2} x.
+\end{align*}
+with $\alpha_1 > \alpha_2$. This order restriction on the intercepts ensures that $P(y > 1) > P(y > 2)$, which should happen for an ordinal $y$.
+
+
+## Proportional Odds
+In the above model, the proportional odds restriction says that $\beta_1 = \beta_2$. In words, the estimated "effect" of $x$ remains the same, regardless of what part of the ordinal scale we are predicting. This restriction seems to be very common amongst ordinal regression modelers, so much that the cumulative model with proportional odds restriction is commonly called *the* proportional odds model. But we could also add a proportional odds restriction to an adjacent model or to a stage model, in which case we would have a proportional odds model that is different from *the* proportional odds model.
+
+
+## Illustration
+To demonstrate the implications of the proportional odds restriction, we consider the `email` data from the *smdata* package [a package full of datasets that were used in the @smimer13 book]. The dataset is from the 2010 U.S. General Social Survey and contains responses to two questions: "marital status" and "weekly hours spent emailing." The marital status variable, which will be the response variable, can take the values of "never married", "married", and "divorced". It is an ordinal variable because there are no remarried people in the dataset.  So a person can only move from "never married" to "married", and from "married" to "divorced".
+
+Our ordinal regression model will be predicting a person's marital status based on their weekly time spent emailing (remember that this dataset is from 2010, so social media is still relatively young!). A stage model works well for our marital status variable. It predicts two things: first, the chance of staying unmarried (i.e., the chance of being unmarried given that you have any marital status), then the chance of staying married (i.e., the chance of being married given that you are either married or divorced). The *VGAM* package [@yee10] is a nice and mature package that can estimate these models. Below, we load the data, fit the stage model with proportional odds assumption (using `parallel = TRUE`), and print the results:
+
+```{r m1, message = FALSE}
+data(email, package = "smdata")
+
+library(VGAM)
+
+m1 <- vglm(marital ~ z.email, family = sratio(parallel = TRUE), data = email)
+summary(m1)
+```
+
+The estimated slope associated with time spent emailing (`z.email`) is close to 0 relative to its standard error. It suggests that time spent emailing is unrelated to marital status.
+
+
+Now, let's fit the same model without the proportional odds assumption and examine results:
+
+```{r m2, message = FALSE}
+m2 <- vglm(marital ~ z.email, family = sratio(parallel = FALSE), data = email)
+summary(m2)
+```
+
+Now we have two slopes associated with `z.email`, one predicting the chance of remaining single and one predicting the chance of remaining married. We see that the first slope is positive, suggesting that increased time spent emailing is associated with a higher chance of staying single. The second slope is negative, suggesting that increased time spent emailing is associated with a lower chance of staying married. The signs of these two slopes match the intuition that, to have successful relationships, you shouldn't spend all your time on the computer!
+
+You may object that the p-values for both `m2` slopes are above .05, so that the proportional odds assumption may not make a big difference: for both models, we may conclude "no significant effects of time spent emailing." I agree the results of these models do not provide convincing evidence that time emailing is associated with marital status, but I still find the example worthwhile for conveying the meaning of the proportional odds assumption.
+
+
+## Summary
+This example helps to illustrate the implications of the proportional odds assumption. We could imagine a related dataset where there is a strong positive slope suggesting that email time is related to staying single, and a strong negative slope suggesting that email time is related to getting divorced. Then, when we employ the proportion odds assumption, the differing signs cancel one another out, leading to an estimated slope near 0. You can apply this intuition to your own ordinal regression models, deciding whether the proportional odds assumption may be problematic in other applications.
+
+
+## License
+The code on this page is copyrighted by Edgar Merkle and licensed under the GPLv3 license:
+
+[https://www.gnu.org/licenses/gpl-3.0.en.html](https://www.gnu.org/licenses/gpl-3.0.en.html)
+
+The text and figures on this page are copyrighted by Edgar Merkle and licensed under the CC BY-NC 4.0 license:
+
+[https://creativecommons.org/licenses/by-nc/4.0/](https://creativecommons.org/licenses/by-nc/4.0/)
+
+
+## Computing Environment
+
+```{r cenv}
+sessionInfo()
+```
+
+
+## References
+

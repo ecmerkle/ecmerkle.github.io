@@ -7,10 +7,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Edgar C. Merkle">
-<meta name="dcterms.date" content="2024-02-29">
-<meta name="description" content="This document provides an example of how the targets package can benefit academic projects, where the goal is to write a journal article or related report. It illustrates how targets works better than caches in Rmarkdown and knitr, and it provides a brief discussion of how to get started.">
+<meta name="dcterms.date" content="2025-02-20">
+<meta name="description" content="Ordinal regression models often employ a proportional odds restriction, which roughly means that the effect of moving from one ordinal category to the next is constant. Here, we provide an example of a model with a predictor that has opposite effects depending on the ordinal categories in question. The example helps provide intuition for what the proportional odds restriction does and why we might consider avoiding it. The example originally appeared in Smithson and Merkle (2013).">
 
-<title>The targets package for academic research – Ed Merkle</title>
+<title>The proportional odds restriction – Ed Merkle</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -124,15 +124,44 @@ div.csl-indent {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../styles.css">
-<meta name="citation_title" content="The *targets* package for academic research">
+<meta name="citation_title" content="The proportional odds restriction">
 <meta name="citation_author" content="Edgar C. Merkle">
-<meta name="citation_publication_date" content="2024-02-29">
-<meta name="citation_cover_date" content="2024-02-29">
-<meta name="citation_year" content="2024">
-<meta name="citation_online_date" content="2024-02-29">
-<meta name="citation_fulltext_html_url" content="https://ecmerkle.github.io/cs/targets.html">
+<meta name="citation_publication_date" content="2025-02-20">
+<meta name="citation_cover_date" content="2025-02-20">
+<meta name="citation_year" content="2025">
+<meta name="citation_online_date" content="2025-02-20">
+<meta name="citation_fulltext_html_url" content="https://ecmerkle.github.io/cs/propodds.html">
 <meta name="citation_language" content="en">
 <meta name="citation_reference" content="citation_title=Efficient Bayesian structural equation modeling in Stan;,citation_author=E. C. Merkle;,citation_author=E. Fitzsimmons;,citation_author=J. Uanhoro;,citation_author=B. Goodrich;,citation_publication_date=2021;,citation_cover_date=2021;,citation_year=2021;,citation_fulltext_html_url=https://www.jstatsoft.org/article/view/v100i06;,citation_issue=6;,citation_volume=100;,citation_journal_title=Journal of Statistical Software;">
 <meta name="citation_reference" content="citation_title=blavaan: Bayesian structural equation models via parameter expansion;,citation_author=E. C. Merkle;,citation_author=Y. Rosseel;,citation_publication_date=2018;,citation_cover_date=2018;,citation_year=2018;,citation_fulltext_html_url=https://www.jstatsoft.org/article/view/v085i04;,citation_issue=4;,citation_volume=85;,citation_journal_title=Journal of Statistical Software;">
@@ -251,17 +280,18 @@ div.csl-indent {
 <header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">The <em>targets</em> package for academic research</h1>
+      <h1 class="title">The proportional odds restriction</h1>
                   <div>
         <div class="description">
-          <p>This document provides an example of how the <em>targets</em> package can benefit academic projects, where the goal is to write a journal article or related report. It illustrates how <em>targets</em> works better than caches in Rmarkdown and knitr, and it provides a brief discussion of how to get started.</p>
+          <p>Ordinal regression models often employ a proportional odds restriction, which roughly means that the effect of moving from one ordinal category to the next is constant. Here, we provide an example of a model with a predictor that has opposite effects depending on the ordinal categories in question. The example helps provide intuition for what the proportional odds restriction does and why we might consider avoiding it. The example originally appeared in <span class="citation" data-cites="smimer13">Smithson and Merkle (<a href="#ref-smimer13" role="doc-biblioref">2013</a>)</span>.</p>
         </div>
       </div>
                           <div class="quarto-categories">
-                <div class="quarto-category">pipelines</div>
-                <div class="quarto-category">targets</div>
+                <div class="quarto-category">ordinal regression</div>
+                <div class="quarto-category">proportional odds</div>
                 <div class="quarto-category">statistics</div>
                 <div class="quarto-category">R</div>
+                <div class="quarto-category">VGAM</div>
               </div>
                   </div>
   </div>
@@ -288,7 +318,7 @@ div.csl-indent {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">February 29, 2024</p>
+        <p class="date">February 20, 2025</p>
       </div>
     </div>
     
@@ -303,10 +333,10 @@ div.csl-indent {
     <h2 id="toc-title">Contents</h2>
    
   <ul>
-  <li><a href="#illustrating-the-cache-problem" id="toc-illustrating-the-cache-problem" class="nav-link active" data-scroll-target="#illustrating-the-cache-problem">Illustrating the Cache Problem</a></li>
-  <li><a href="#solution" id="toc-solution" class="nav-link" data-scroll-target="#solution">Solution</a></li>
-  <li><a href="#getting-started" id="toc-getting-started" class="nav-link" data-scroll-target="#getting-started">Getting Started</a></li>
-  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  <li><a href="#ordinal-regression" id="toc-ordinal-regression" class="nav-link active" data-scroll-target="#ordinal-regression">Ordinal Regression</a></li>
+  <li><a href="#proportional-odds" id="toc-proportional-odds" class="nav-link" data-scroll-target="#proportional-odds">Proportional Odds</a></li>
+  <li><a href="#illustration" id="toc-illustration" class="nav-link" data-scroll-target="#illustration">Illustration</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a></li>
   <li><a href="#license" id="toc-license" class="nav-link" data-scroll-target="#license">License</a></li>
   <li><a href="#computing-environment" id="toc-computing-environment" class="nav-link" data-scroll-target="#computing-environment">Computing Environment</a></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
@@ -324,46 +354,105 @@ div.csl-indent {
 
 
 
-<p>I heard about the <em>targets</em> package <span class="citation" data-cites="targets">(<a href="#ref-targets" role="doc-biblioref">Landau 2021b</a>)</span> a few times in the past, the most notable being <a href="https://wlandau.github.io/stantargets-talk">Will Landau’s presentation at StanCon 2023.</a> As an academic researcher whose projects often lead to journal articles, I did not immediately see the advantage of <em>targets</em> over dynamic report generation packages like Rmarkdown and knitr. This case study illustrates how <em>targets</em> provides useful features that cannot be handled by dynamic report generation alone.</p>
-<section id="illustrating-the-cache-problem" class="level2">
-<h2 class="anchored" data-anchor-id="illustrating-the-cache-problem">Illustrating the Cache Problem</h2>
-<p>The <a href="https://cran.r-project.org/web/packages/targets/vignettes/overview.html"><em>targets</em> overview vignette</a> states that the package “reduces the burdens of repeated computation and manual data micromanagement.” To me, that sounded similar to using Rmarkdown with <code>cache = TRUE</code>: I cache the results when I compile the Rmarkdown document, so that I do not have to repeatedly run the same computations.</p>
-<p>But the catch is that the Rmarkdown cache is not intelligent, in the sense that it cannot tell when a change to one code chunk influences another code chunk. This leads to cached results that are stale, in the sense the the cached results no longer match what would happen if you re-ran the entire Rmarkdown document from scratch.</p>
-<p>To see what I mean, consider the following three code chunks that could plausibly appear in an Rmarkdown file:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="in">set.seed(311)</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="in">x &lt;- 1:10</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="in">y &lt;- x + rnorm(10, sd = .5)</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, out.height = "2.5in", fig.align = "center"}</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="in">plot(x, y)</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, cache = TRUE}</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="in">summary(lm(y ~ x))</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Notice that the third chunk is cached, while the other two chunks are not.</p>
-<p>Imagine that I compile these three code chunks to pdf or docx or some other format. Then I do extra editing and discover that I am missing a negative sign in my first code chunk; that chunk should actually be:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="in">set.seed(311)</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="in">x &lt;- 1:10</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="in">y &lt;- -x + rnorm(10, sd = .5)</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>When I make this change and recompile, the plot will be updated but not the regression summary. This is because the chunk containing the regression summary was already cached.</p>
+<p>Long ago when I was an assistant professor, I co-authored a <a href="https://www.routledge.com/Generalized-Linear-Models-for-Categorical-and-Continuous-Limited-Dependent/Smithson-Merkle/p/book/9781466551732">book about generalized linear models</a>. The book discusses non-normal linear models, including logistic regression, ordinal regression, and beta regression. In this post, I pull my favorite data example from the book and discuss it. I continue to like it because it helps illustrate the implications of proportional odds regression in an intuitive manner.</p>
+<section id="ordinal-regression" class="level2">
+<h2 class="anchored" data-anchor-id="ordinal-regression">Ordinal Regression</h2>
+<p>There are a few popular varieties of ordinal regression models, with <span class="citation" data-cites="burvuo19">Bürkner and Vuorre (<a href="#ref-burvuo19" role="doc-biblioref">2019</a>)</span> providing a good summary. Around the time I co-authored the book, I found <span class="citation" data-cites="ful09">Fullerton (<a href="#ref-ful09" role="doc-biblioref">2009</a>)</span> to be very enlightening. A key idea is that, across all the ordinal regression models, you are predicting the log odds of something. The “something” that you are predicting determines the type of model. We have:</p>
+<ul>
+<li>Cumulative model: Predict the log odds of being above some point <span class="math inline">\(k\)</span> on the ordinal scale.</li>
+<li>Adjacent model: Predict the log odds of being at point <span class="math inline">\(k\)</span>, given that you are either at point <span class="math inline">\(k\)</span> or point <span class="math inline">\((k-1)\)</span>.</li>
+<li>Stage model: Predict the log odds of being at point <span class="math inline">\(k\)</span>, given that you are at point <span class="math inline">\(k\)</span> or higher.</li>
+</ul>
+<p>Regardless of the type of model, it is a regression, so there are linear equations on the log odds. Notice that <em>equations</em> is plural because, for an ordinal variable, there will be multiple regression equations. For example, imagine we have a cumulative model with one predictor variable and a 3-category ordinal outcome. Then we have two regression equations: <span class="math display">\[\begin{align*}
+\log \left (\frac{P(y &gt; 1)}{P(y = 1)} \right) &amp;= \alpha_1 + \beta_{1} x \\
+\log \left (\frac{P(y &gt; 2)}{P(y \leq 2)} \right) &amp;= \alpha_2 + \beta_{2} x.
+\end{align*}\]</span> with <span class="math inline">\(\alpha_1 &gt; \alpha_2\)</span>. This order restriction on the intercepts ensures that <span class="math inline">\(P(y &gt; 1) &gt; P(y &gt; 2)\)</span>, which should happen for an ordinal <span class="math inline">\(y\)</span>.</p>
 </section>
-<section id="solution" class="level2">
-<h2 class="anchored" data-anchor-id="solution">Solution</h2>
-<p>At this point, you might say that I was stupid to cache the regression summary, if it was possible for the data to change in the future. That is true, but for larger documents with many code chunks (like journal articles), it is difficult to anticipate what may change in the future, because data and analyses might be added and removed over the life of a project. We could decide to never cache anything, but then it can take a really long time to compile the document. It is better to have a system that will re-run code only when needed, and this is where <em>targets</em> helps.</p>
+<section id="proportional-odds" class="level2">
+<h2 class="anchored" data-anchor-id="proportional-odds">Proportional Odds</h2>
+<p>In the above model, the proportional odds restriction says that <span class="math inline">\(\beta_1 = \beta_2\)</span>. In words, the estimated “effect” of <span class="math inline">\(x\)</span> remains the same, regardless of what part of the ordinal scale we are predicting. This restriction seems to be very common amongst ordinal regression modelers, so much that the cumulative model with proportional odds restriction is commonly called <em>the</em> proportional odds model. But we could also add a proportional odds restriction to an adjacent model or to a stage model, in which case we would have a proportional odds model that is different from <em>the</em> proportional odds model.</p>
 </section>
-<section id="getting-started" class="level2">
-<h2 class="anchored" data-anchor-id="getting-started">Getting Started</h2>
-<p><a href="https://books.ropensci.org/targets/walkthrough.html">The <em>targets</em> walkthrough</a> is helpful and illustrates the general process for using <em>targets</em> with your project. But for academic documents, the one thing missing from the walkthrough is the ability to funnel your results into an Rmd or Rnw file. This missing functionality is found in the <code>tar_render()</code> function from the <em>tarchetypes</em> package <span class="citation" data-cites="tarchetypes">(<a href="#ref-tarchetypes" role="doc-biblioref">Landau 2021a</a>)</span>, and an example of how to use it is <a href="https://github.com/ropensci/tarchetypes?tab=readme-ov-file#literate-programming">at this link.</a> The <code>tar_render()</code> function allows you to pass results to an Rmd file for automatic document generation. And when there are changes to the project, <em>targets</em> will know what things need to be re-run and what things don’t need to be re-run.</p>
+<section id="illustration" class="level2">
+<h2 class="anchored" data-anchor-id="illustration">Illustration</h2>
+<p>To demonstrate the implications of the proportional odds restriction, we consider the <code>email</code> data from the <em>smdata</em> package <span class="citation" data-cites="smimer13">(a package full of datasets that were used in the <a href="#ref-smimer13" role="doc-biblioref">Smithson and Merkle 2013</a> book)</span>. The dataset is from the 2010 U.S. General Social Survey and contains responses to two questions: “marital status” and “weekly hours spent emailing.” The marital status variable, which will be the response variable, can take the values of “never married”, “married”, and “divorced”. It is an ordinal variable because there are no remarried people in the dataset. So a person can only move from “never married” to “married”, and from “married” to “divorced”.</p>
+<p>Our ordinal regression model will be predicting a person’s marital status based on their weekly time spent emailing (remember that this dataset is from 2010, so social media is still relatively young!). A stage model works well for our marital status variable. It predicts two things: first, the chance of staying unmarried (i.e., the chance of being unmarried given that you have any marital status), then the chance of staying married (i.e., the chance of being married given that you are either married or divorced). The <em>VGAM</em> package <span class="citation" data-cites="yee10">(<a href="#ref-yee10" role="doc-biblioref">Yee 2010</a>)</span> is a nice and mature package that can estimate these models. Below, we load the data, fit the stage model with proportional odds assumption (using <code>parallel = TRUE</code>), and print the results:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(email, <span class="at">package =</span> <span class="st">"smdata"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(VGAM)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>m1 <span class="ot">&lt;-</span> <span class="fu">vglm</span>(marital <span class="sc">~</span> z.email, <span class="at">family =</span> <span class="fu">sratio</span>(<span class="at">parallel =</span> <span class="cn">TRUE</span>), <span class="at">data =</span> email)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Call:
+vglm(formula = marital ~ z.email, family = sratio(parallel = TRUE), 
+    data = email)
+
+Coefficients: 
+               Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept):1 -0.648481   0.033438 -19.394   &lt;2e-16 ***
+(Intercept):2  0.928087   0.043481  21.345   &lt;2e-16 ***
+z.email       -0.004306   0.026492  -0.163    0.871    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Names of linear predictors: logitlink(P[Y=1|Y&gt;=1]), logitlink(P[Y=2|Y&gt;=2])
+
+Residual deviance: 8208.682 on 7931 degrees of freedom
+
+Log-likelihood: -4104.341 on 7931 degrees of freedom
+
+Number of Fisher scoring iterations: 4 
+
+No Hauck-Donner effect found in any of the estimates
+
+
+Exponentiated coefficients:
+  z.email 
+0.9957037 </code></pre>
+</div>
+</div>
+<p>The estimated slope associated with time spent emailing (<code>z.email</code>) is close to 0 relative to its standard error. It suggests that time spent emailing is unrelated to marital status.</p>
+<p>Now, let’s fit the same model without the proportional odds assumption and examine results:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>m2 <span class="ot">&lt;-</span> <span class="fu">vglm</span>(marital <span class="sc">~</span> z.email, <span class="at">family =</span> <span class="fu">sratio</span>(<span class="at">parallel =</span> <span class="cn">FALSE</span>), <span class="at">data =</span> email)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Call:
+vglm(formula = marital ~ z.email, family = sratio(parallel = FALSE), 
+    data = email)
+
+Coefficients: 
+              Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept):1 -0.64872    0.03345 -19.396   &lt;2e-16 ***
+(Intercept):2  0.92827    0.04352  21.331   &lt;2e-16 ***
+z.email:1      0.04009    0.03285   1.220   0.2223    
+z.email:2     -0.08001    0.04257  -1.879   0.0602 .  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Names of linear predictors: logitlink(P[Y=1|Y&gt;=1]), logitlink(P[Y=2|Y&gt;=2])
+
+Residual deviance: 8203.776 on 7930 degrees of freedom
+
+Log-likelihood: -4101.888 on 7930 degrees of freedom
+
+Number of Fisher scoring iterations: 4 
+
+No Hauck-Donner effect found in any of the estimates
+
+
+Exponentiated coefficients:
+z.email:1 z.email:2 
+1.0409022 0.9231083 </code></pre>
+</div>
+</div>
+<p>Now we have two slopes associated with <code>z.email</code>, one predicting the chance of remaining single and one predicting the chance of remaining married. We see that the first slope is positive, suggesting that increased time spent emailing is associated with a higher chance of staying single. The second slope is negative, suggesting that increased time spent emailing is associated with a lower chance of staying married. The signs of these two slopes match the intuition that, to have successful relationships, you shouldn’t spend all your time on the computer!</p>
+<p>You may object that the p-values for both <code>m2</code> slopes are above .05, so that the proportional odds assumption may not make a big difference: for both models, we may conclude “no significant effects of time spent emailing.” I agree the results of these models do not provide convincing evidence that time emailing is associated with marital status, but I still find the example worthwhile for conveying the meaning of the proportional odds assumption.</p>
 </section>
-<section id="conclusion" class="level2">
-<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
-<p>A good deal of recent attention has been devoted to errors in academic articles. While the focus is often on statistical methodology, cheating, and experimental design, a more mundane source of errors involves outdated and incoherent results. These happen when one part of a project changes, the changes have further implications for downstream results, and the researcher doesn’t fully realize or address the further implications. I speculate that these mundane errors are common because, when the goal is to publish as quickly as possible, errors are bound to slip through the cracks. In this context, we could view <em>targets</em> as an extra research assistant who double-checks that all project results are up to date.</p>
-<p>Like other software tools, you have to invest some time in setting up <em>targets</em> for a project. You need to create the <code>_targets.R</code> file, which defines all the targets/steps of one’s project. I also found it helpful to put free-standing code inside functions so that the code can be called more easily. These extra steps will undoubtedly deter some researchers from regularly using <em>targets</em>, and it may not be worth it for some short-term analyses. But the <em>targets</em> setup is like compounding interest for project efficiency, making your life easier as the project drags on through journal submissions, rejections, revisions, and resubmissions.</p>
+<section id="summary" class="level2">
+<h2 class="anchored" data-anchor-id="summary">Summary</h2>
+<p>This example helps to illustrate the implications of the proportional odds assumption. We could imagine a related dataset where there is a strong positive slope suggesting that email time is related to staying single, and a strong negative slope suggesting that email time is related to getting divorced. Then, when we employ the proportion odds assumption, the differing signs cancel one another out, leading to an estimated slope near 0. You can apply this intuition to your own ordinal regression models, deciding whether the proportional odds assumption may be problematic in other applications.</p>
 </section>
 <section id="license" class="level2">
 <h2 class="anchored" data-anchor-id="license">License</h2>
@@ -375,11 +464,11 @@ div.csl-indent {
 <section id="computing-environment" class="level2">
 <h2 class="anchored" data-anchor-id="computing-environment">Computing Environment</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>R version 4.3.2 (2023-10-31)
-Platform: x86_64-pc-linux-gnu (64-bit)
-Running under: Ubuntu 22.04.4 LTS
+<pre><code>R version 4.4.2 (2024-10-31)
+Platform: x86_64-pc-linux-gnu
+Running under: Ubuntu 22.04.5 LTS
 
 Matrix products: default
 BLAS:   /usr/lib/x86_64-linux-gnu/atlas/libblas.so.3.10.3 
@@ -397,21 +486,17 @@ time zone: America/Chicago
 tzcode source: system (glibc)
 
 attached base packages:
-[1] stats     graphics  grDevices datasets  utils     methods   base     
+[1] splines   stats4    stats     graphics  grDevices datasets  utils    
+[8] methods   base     
 
 other attached packages:
-[1] targets_1.3.2
+[1] VGAM_1.1-12
 
 loaded via a namespace (and not attached):
- [1] vctrs_0.6.5       cli_3.6.2         knitr_1.45        rlang_1.1.3      
- [5] xfun_0.42         processx_3.8.3    jsonlite_1.8.8    data.table_1.15.0
- [9] glue_1.7.0        backports_1.4.1   htmltools_0.5.7   ps_1.7.6         
-[13] fansi_1.0.6       rmarkdown_2.25    evaluate_0.23     tibble_3.2.1     
-[17] base64url_1.4     fastmap_1.1.1     yaml_2.3.8        lifecycle_1.0.4  
-[21] compiler_4.3.2    codetools_0.2-19  igraph_2.0.2      htmlwidgets_1.6.4
-[25] pkgconfig_2.0.3   digest_0.6.34     R6_2.5.1          tidyselect_1.2.0 
-[29] utf8_1.2.4        pillar_1.9.0      callr_3.7.5       magrittr_2.0.3   
-[33] tools_4.3.2       bspm_0.5.5       </code></pre>
+ [1] digest_0.6.37     fastmap_1.2.0     xfun_0.50         bspm_0.5.5       
+ [5] knitr_1.49        htmltools_0.5.8.1 rmarkdown_2.29    cli_3.6.3        
+ [9] compiler_4.4.2    tools_4.4.2       evaluate_1.0.3    yaml_2.3.10      
+[13] rlang_1.1.5       jsonlite_1.8.9    htmlwidgets_1.6.4</code></pre>
 </div>
 </div>
 </section>
@@ -423,22 +508,28 @@ loaded via a namespace (and not attached):
 </section>
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
-<div id="ref-tarchetypes" class="csl-entry" role="listitem">
-Landau, William Michael. 2021a. <em><span class="nocase">tarchetypes: Archetypes</span> for Targets</em>.
+<div id="ref-burvuo19" class="csl-entry" role="listitem">
+Bürkner, Paul-Christian, and Matti Vuorre. 2019. <span>“Ordinal Regression Models in Psychology: <span>A</span> Tutorial.”</span> <em>Advances in Methods and Practices in Psychological Science</em> 2 (1): 77–101. <a href="https://doi.org/10.1177/2515245918823199">https://doi.org/10.1177/2515245918823199</a>.
 </div>
-<div id="ref-targets" class="csl-entry" role="listitem">
-———. 2021b. <span>“The <span class="nocase">targets R</span> Package: <span>A</span> Dynamic <span class="nocase">Make-like</span> Function-Oriented Pipeline Toolkit for Reproducibility and High-Performance Computing.”</span> <em>Journal of Open Source Software</em> 6 (57): 2959. <a href="https://doi.org/10.21105/joss.02959">https://doi.org/10.21105/joss.02959</a>.
+<div id="ref-ful09" class="csl-entry" role="listitem">
+Fullerton, A. S. 2009. <span>“A Conceptual Framework for Ordered Logistic Regression Models.”</span> <em>Sociological Methods &amp; Research</em> 38: 306–47. <a href="https://doi.org/10.1177/0049124109346162">https://doi.org/10.1177/0049124109346162</a>.
 </div>
-</div></section><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{merkle2024,
+<div id="ref-smimer13" class="csl-entry" role="listitem">
+Smithson, M., and E. C. Merkle. 2013. <em>Generalized Linear Models for Categorical and Continuous Limited Dependent Variables</em>. Boca Raton, FL:&nbsp;Chapman &amp; Hall/CRC.
+</div>
+<div id="ref-yee10" class="csl-entry" role="listitem">
+Yee, T. W. 2010. <span>“The <span>VGAM</span> Package for Categorical Data Analysis.”</span> <em>Journal of Statistical Software</em> 32: 1–34. <a href="http://www.jstatsoft.org/v32/i10/">http://www.jstatsoft.org/v32/i10/</a>.
+</div>
+</div></section><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{merkle2025,
   author = {Merkle, Edgar C.},
-  title = {The *Targets* Package for Academic Research},
-  date = {2024-02-29},
-  url = {https://ecmerkle.github.io/cs/targets.html},
+  title = {The Proportional Odds Restriction},
+  date = {2025-02-20},
+  url = {https://ecmerkle.github.io/cs/propodds.html},
   langid = {en}
 }
-</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-merkle2024" class="csl-entry quarto-appendix-citeas" role="listitem">
-Merkle, Edgar C. 2024. <span>“The *Targets* Package for Academic
-Research.”</span> February 29, 2024. <a href="https://ecmerkle.github.io/cs/targets.html">https://ecmerkle.github.io/cs/targets.html</a>.
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-merkle2025" class="csl-entry quarto-appendix-citeas" role="listitem">
+Merkle, Edgar C. 2025. <span>“The Proportional Odds Restriction.”</span>
+February 20, 2025. <a href="https://ecmerkle.github.io/cs/propodds.html">https://ecmerkle.github.io/cs/propodds.html</a>.
 </div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
