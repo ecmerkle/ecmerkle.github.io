@@ -7,10 +7,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Edgar C. Merkle">
-<meta name="dcterms.date" content="2024-02-29">
-<meta name="description" content="This document provides an example of how the targets package can benefit academic projects, where the goal is to write a journal article or related report. It illustrates how targets works better than caches in Rmarkdown and knitr, and it provides a brief discussion of how to get started.">
+<meta name="dcterms.date" content="2025-03-20">
+<meta name="description" content="Given a covariance matrix with some covariances fixed to 0, is it possible to permute the rows and columns so that the matrix is block diagonal? In this post, we consider an automated method for answering this question.">
 
-<title>The targets package for academic research – Ed Merkle</title>
+<title>Finding blocks in covariance matrices – Ed Merkle</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -124,15 +124,44 @@ div.csl-indent {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../styles.css">
-<meta name="citation_title" content="The *targets* package for academic research">
+<meta name="citation_title" content="Finding blocks in covariance matrices">
 <meta name="citation_author" content="Edgar C. Merkle">
-<meta name="citation_publication_date" content="2024-02-29">
-<meta name="citation_cover_date" content="2024-02-29">
-<meta name="citation_year" content="2024">
-<meta name="citation_online_date" content="2024-02-29">
-<meta name="citation_fulltext_html_url" content="https://ecmerkle.github.io/cs/targets.html">
+<meta name="citation_publication_date" content="2025-03-20">
+<meta name="citation_cover_date" content="2025-03-20">
+<meta name="citation_year" content="2025">
+<meta name="citation_online_date" content="2025-03-20">
+<meta name="citation_fulltext_html_url" content="https://ecmerkle.github.io/cs/blockmat.html">
 <meta name="citation_language" content="en">
 <meta name="citation_reference" content="citation_title=Efficient Bayesian structural equation modeling in Stan;,citation_author=E. C. Merkle;,citation_author=E. Fitzsimmons;,citation_author=J. Uanhoro;,citation_author=B. Goodrich;,citation_publication_date=2021;,citation_cover_date=2021;,citation_year=2021;,citation_fulltext_html_url=https://www.jstatsoft.org/article/view/v100i06;,citation_issue=6;,citation_volume=100;,citation_journal_title=Journal of Statistical Software;">
 <meta name="citation_reference" content="citation_title=blavaan: Bayesian structural equation models via parameter expansion;,citation_author=E. C. Merkle;,citation_author=Y. Rosseel;,citation_publication_date=2018;,citation_cover_date=2018;,citation_year=2018;,citation_fulltext_html_url=https://www.jstatsoft.org/article/view/v085i04;,citation_issue=4;,citation_volume=85;,citation_journal_title=Journal of Statistical Software;">
@@ -257,17 +286,20 @@ div.csl-indent {
 <header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">The <em>targets</em> package for academic research</h1>
+      <h1 class="title">Finding blocks in covariance matrices</h1>
                   <div>
         <div class="description">
-          <p>This document provides an example of how the <em>targets</em> package can benefit academic projects, where the goal is to write a journal article or related report. It illustrates how <em>targets</em> works better than caches in Rmarkdown and knitr, and it provides a brief discussion of how to get started.</p>
+          <p>Given a covariance matrix with some covariances fixed to 0, is it possible to permute the rows and columns so that the matrix is block diagonal? In this post, we consider an automated method for answering this question.</p>
         </div>
       </div>
                           <div class="quarto-categories">
-                <div class="quarto-category">pipelines</div>
-                <div class="quarto-category">targets</div>
+                <div class="quarto-category">covariance matrix</div>
+                <div class="quarto-category">positive definite</div>
+                <div class="quarto-category">graph theory</div>
                 <div class="quarto-category">statistics</div>
                 <div class="quarto-category">R</div>
+                <div class="quarto-category">Python</div>
+                <div class="quarto-category">igraph</div>
               </div>
                   </div>
   </div>
@@ -294,7 +326,7 @@ div.csl-indent {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">February 29, 2024</p>
+        <p class="date">March 20, 2025</p>
       </div>
     </div>
     
@@ -309,10 +341,10 @@ div.csl-indent {
     <h2 id="toc-title">Contents</h2>
    
   <ul>
-  <li><a href="#illustrating-the-cache-problem" id="toc-illustrating-the-cache-problem" class="nav-link active" data-scroll-target="#illustrating-the-cache-problem">Illustrating the Cache Problem</a></li>
-  <li><a href="#solution" id="toc-solution" class="nav-link" data-scroll-target="#solution">Solution</a></li>
-  <li><a href="#getting-started" id="toc-getting-started" class="nav-link" data-scroll-target="#getting-started">Getting Started</a></li>
-  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  <li><a href="#example" id="toc-example" class="nav-link active" data-scroll-target="#example">Example</a></li>
+  <li><a href="#automation" id="toc-automation" class="nav-link" data-scroll-target="#automation">Automation</a></li>
+  <li><a href="#larger-example" id="toc-larger-example" class="nav-link" data-scroll-target="#larger-example">Larger Example</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a></li>
   <li><a href="#license" id="toc-license" class="nav-link" data-scroll-target="#license">License</a></li>
   <li><a href="#computing-environment" id="toc-computing-environment" class="nav-link" data-scroll-target="#computing-environment">Computing Environment</a></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
@@ -330,46 +362,316 @@ div.csl-indent {
 
 
 
-<p>I heard about the <em>targets</em> package <span class="citation" data-cites="targets">(<a href="#ref-targets" role="doc-biblioref">Landau 2021b</a>)</span> a few times in the past, the most notable being <a href="https://wlandau.github.io/stantargets-talk">Will Landau’s presentation at StanCon 2023.</a> As an academic researcher whose projects often lead to journal articles, I did not immediately see the advantage of <em>targets</em> over dynamic report generation packages like Rmarkdown and knitr. This case study illustrates how <em>targets</em> provides useful features that cannot be handled by dynamic report generation alone.</p>
-<section id="illustrating-the-cache-problem" class="level2">
-<h2 class="anchored" data-anchor-id="illustrating-the-cache-problem">Illustrating the Cache Problem</h2>
-<p>The <a href="https://cran.r-project.org/web/packages/targets/vignettes/overview.html"><em>targets</em> overview vignette</a> states that the package “reduces the burdens of repeated computation and manual data micromanagement.” To me, that sounded similar to using Rmarkdown with <code>cache = TRUE</code>: I cache the results when I compile the Rmarkdown document, so that I do not have to repeatedly run the same computations.</p>
-<p>But the catch is that the Rmarkdown cache is not intelligent, in the sense that it cannot tell when a change to one code chunk influences another code chunk. This leads to cached results that are stale, in the sense the the cached results no longer match what would happen if you re-ran the entire Rmarkdown document from scratch.</p>
-<p>To see what I mean, consider the following three code chunks that could plausibly appear in an Rmarkdown file:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="in">set.seed(311)</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="in">x &lt;- 1:10</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="in">y &lt;- x + rnorm(10, sd = .5)</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, out.height = "2.5in", fig.align = "center"}</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="in">plot(x, y)</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, cache = TRUE}</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="in">summary(lm(y ~ x))</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Notice that the third chunk is cached, while the other two chunks are not.</p>
-<p>Imagine that I compile these three code chunks to pdf or docx or some other format. Then I do extra editing and discover that I am missing a negative sign in my first code chunk; that chunk should actually be:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="in">set.seed(311)</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="in">x &lt;- 1:10</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="in">y &lt;- -x + rnorm(10, sd = .5)</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>When I make this change and recompile, the plot will be updated but not the regression summary. This is because the chunk containing the regression summary was already cached.</p>
+<p>Given a covariance matrix with some covariances fixed to 0, is it possible to permute the rows and columns so that the matrix is block diagonal? This question is important in <a href="https://ecmerkle.github.io/blavaan/">Bayesian latent variable modeling</a> and elsewhere, because it influences the prior distributions that we can use. To be specific, if our covariance matrix consists of unrestricted blocks, then the 0 entries don’t really matter. We can specify an inverse Wishart or LKJ or other prior on each block of the covariance matrix. On the other hand, if our covariance matrix does not consist of unrestricted blocks, then the prior distribution becomes complicated <span class="citation" data-cites="merkle2023opaque">(e.g., <a href="#ref-merkle2023opaque" role="doc-biblioref">Merkle et al. 2023</a>)</span>. This is because the possible values of unrestricted covariances are influenced by the zero entries, along with the constraint that the entire covariance matrix is positive definite.</p>
+<section id="example" class="level2">
+<h2 class="anchored" data-anchor-id="example">Example</h2>
+<p>To make this more concrete, let’s consider the correlation matrix below.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Python</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>origmat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>          
+ 1 1 0 1 0
+ 1 1 0 1 0
+ 0 0 1 0 1
+ 1 1 0 1 0
+ 0 0 1 0 1</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(origmat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[1. 1. 0. 1. 0.]
+ [1. 1. 0. 1. 0.]
+ [0. 0. 1. 0. 1.]
+ [1. 1. 0. 1. 0.]
+ [0. 0. 1. 0. 1.]]</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>The entries of 0 are fixed to 0, and the entries of 1 are free parameters. For most of us, it is not clear whether or not this is a block diagonal matrix. But if we reorder the rows and columns so that the first, second, and fourth come first, followed by the third and fifth, we obtain:</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false">Python</a></li></ul>
+<div class="tab-content">
+<div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>origmat[<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">3</span>,<span class="dv">5</span>), <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">3</span>,<span class="dv">5</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>          
+ 1 1 1 0 0
+ 1 1 1 0 0
+ 1 1 1 0 0
+ 0 0 0 1 1
+ 0 0 0 1 1</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(origmat[[<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">4</span>]][:, [<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">4</span>]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[1. 1. 1. 0. 0.]
+ [1. 1. 1. 0. 0.]
+ [1. 1. 1. 0. 0.]
+ [0. 0. 0. 1. 1.]
+ [0. 0. 0. 1. 1.]]</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>which is a block diagonal matrix. We now know we can use one prior distribution on the block in rows/columns one to three, and a separate prior distribution on the block in rows/columns four to five. In general, we want to automatically permute the rows and columns to block diagonal form where possible. This is because we can’t be sure that the matrix will be pre-specified in block diagonal form.</p>
 </section>
-<section id="solution" class="level2">
-<h2 class="anchored" data-anchor-id="solution">Solution</h2>
-<p>At this point, you might say that I was stupid to cache the regression summary, if it was possible for the data to change in the future. That is true, but for larger documents with many code chunks (like journal articles), it is difficult to anticipate what may change in the future, because data and analyses might be added and removed over the life of a project. We could decide to never cache anything, but then it can take a really long time to compile the document. It is better to have a system that will re-run code only when needed, and this is where <em>targets</em> helps.</p>
+<section id="automation" class="level2">
+<h2 class="anchored" data-anchor-id="automation">Automation</h2>
+<p>For a time, I wasn’t sure how to automate this. I could have coded something myself, but I was pretty sure that I would be re-inventing the wheel.</p>
+<p>I found an answer in the graph theory concept of <a href="https://en.wikipedia.org/wiki/Connectivity_(graph_theory)"><em>connectivity</em></a>. In short, we treat each unrestricted entry of the covariance matrix as an undirected edge in a graph. We then search for the <em>connected components</em> of the graph. Each component is a block of the covariance matrix. We can then determine whether or not each block is unrestricted.</p>
+<p>Functionality for doing this comes from the <em>igraph</em> package <span class="citation" data-cites="igraph2 igraph">(<a href="#ref-igraph2" role="doc-biblioref">Csárdi and Nepusz 2006</a>; <a href="#ref-igraph" role="doc-biblioref">Csárdi et al. 2025</a>)</span>. Below, we create a graph of our covariance matrix, where each free parameter is an undirected edge. The <code>components()</code> function then finds blocks of the covariance matrix; in network language, these are the maximal connected components of the graph.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-3-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-1" role="tab" aria-controls="tabset-3-1" aria-selected="true">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-2" role="tab" aria-controls="tabset-3-2" aria-selected="false">Python</a></li></ul>
+<div class="tab-content">
+<div id="tabset-3-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-3-1-tab">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"igraph"</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> <span class="fu">graph_from_adjacency_matrix</span>(origmat, <span class="at">mode =</span> <span class="st">"undirected"</span>)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>blks <span class="ot">&lt;-</span> <span class="fu">components</span>(g)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>blks</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$membership
+          
+1 1 2 1 2 
+
+$csize
+[1] 3 2
+
+$no
+[1] 2</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-3-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-3-2-tab">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> igraph <span class="im">as</span> ig</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>g <span class="op">=</span> ig.Graph.Adjacency(origmat)</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>blks <span class="op">=</span> g.connected_components(mode <span class="op">=</span> <span class="st">'weak'</span>)</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="bu">vars</span>(blks)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>{'_membership': [0, 0, 1, 0, 1], '_len': 2, '_graph': &lt;igraph.Graph object at 0x7fe3237dd940&gt;, '_modularity': None, '_modularity_dirty': True, '_modularity_params': {}}</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>The <code>membership</code> entry of the results shows that rows 1, 2, and 4 belong to one block, and rows 3 and 5 belong to the other block. After that, we see that the first block contains 3 variables and the second block contains 2 variables. We can reorder the covariance matrix using this membership information, via</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-4-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-1" role="tab" aria-controls="tabset-4-1" aria-selected="true">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-4-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-2" role="tab" aria-controls="tabset-4-2" aria-selected="false">Python</a></li></ul>
+<div class="tab-content">
+<div id="tabset-4-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-4-1-tab">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">order</span>(blks<span class="sc">$</span>membership)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1 2 4 3 5</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-4-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-4-2-tab">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(np.argsort(blks.membership))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[0 1 3 2 4]</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
 </section>
-<section id="getting-started" class="level2">
-<h2 class="anchored" data-anchor-id="getting-started">Getting Started</h2>
-<p><a href="https://books.ropensci.org/targets/walkthrough.html">The <em>targets</em> walkthrough</a> is helpful and illustrates the general process for using <em>targets</em> with your project. But for academic documents, the one thing missing from the walkthrough is the ability to funnel your results into an Rmd or Rnw file. This missing functionality is found in the <code>tar_render()</code> function from the <em>tarchetypes</em> package <span class="citation" data-cites="tarchetypes">(<a href="#ref-tarchetypes" role="doc-biblioref">Landau 2021a</a>)</span>, and an example of how to use it is <a href="https://github.com/ropensci/tarchetypes?tab=readme-ov-file#literate-programming">at this link.</a> The <code>tar_render()</code> function allows you to pass results to an Rmd file for automatic document generation. And when there are changes to the project, <em>targets</em> will know what things need to be re-run and what things don’t need to be re-run.</p>
+<section id="larger-example" class="level2">
+<h2 class="anchored" data-anchor-id="larger-example">Larger Example</h2>
+<p>Let’s consider a larger example with an <span class="math inline">\(11 \times 11\)</span> matrix. Again, entries of 0 are fixed to 0 and entries of 1 are free parameters.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-5-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-1" role="tab" aria-controls="tabset-5-1" aria-selected="true">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-5-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-2" role="tab" aria-controls="tabset-5-2" aria-selected="false">Python</a></li></ul>
+<div class="tab-content">
+<div id="tabset-5-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-5-1-tab">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>bigmat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                      
+ 1 0 0 0 0 0 0 0 0 0 0
+ 0 1 0 0 0 0 0 0 0 0 0
+ 0 0 1 0 0 0 0 0 0 0 0
+ 0 0 0 1 0 0 0 1 0 0 0
+ 0 0 0 0 1 0 1 0 1 0 0
+ 0 0 0 0 0 1 0 0 0 1 0
+ 0 0 0 0 1 0 1 0 0 0 1
+ 0 0 0 1 0 0 0 1 0 0 0
+ 0 0 0 0 1 0 0 0 1 0 1
+ 0 0 0 0 0 1 0 0 0 1 0
+ 0 0 0 0 0 0 1 0 1 0 1</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-5-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-5-2-tab">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(bigmat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[1. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]
+ [0. 1. 0. 0. 0. 0. 0. 0. 0. 0. 0.]
+ [0. 0. 1. 0. 0. 0. 0. 0. 0. 0. 0.]
+ [0. 0. 0. 1. 0. 0. 0. 1. 0. 0. 0.]
+ [0. 0. 0. 0. 1. 0. 1. 0. 1. 0. 0.]
+ [0. 0. 0. 0. 0. 1. 0. 0. 0. 1. 0.]
+ [0. 0. 0. 0. 1. 0. 1. 0. 0. 0. 1.]
+ [0. 0. 0. 1. 0. 0. 0. 1. 0. 0. 0.]
+ [0. 0. 0. 0. 1. 0. 0. 0. 1. 0. 1.]
+ [0. 0. 0. 0. 0. 1. 0. 0. 0. 1. 0.]
+ [0. 0. 0. 0. 0. 0. 1. 0. 1. 0. 1.]]</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>Here is the same matrix with just the 1s, so that it is easier to see the free entries:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>                      
+ 1                    
+   1                  
+     1                
+       1       1      
+         1   1   1    
+           1       1  
+         1   1       1
+       1       1      
+         1       1   1
+           1       1  
+             1   1   1</code></pre>
+</div>
+</div>
+<p>The free entries look structured, but it is not clear whether this could be a block diagonal matrix. So we examine connectivity:</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-6-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-6-1" role="tab" aria-controls="tabset-6-1" aria-selected="true">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-6-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-6-2" role="tab" aria-controls="tabset-6-2" aria-selected="false">Python</a></li></ul>
+<div class="tab-content">
+<div id="tabset-6-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-6-1-tab">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> <span class="fu">graph_from_adjacency_matrix</span>(bigmat, <span class="at">mode =</span> <span class="st">"undirected"</span>)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>blks <span class="ot">&lt;-</span> <span class="fu">components</span>(g)</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>blks</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$membership
+                      
+1 2 3 4 5 6 5 4 5 6 5 
+
+$csize
+[1] 1 1 1 2 4 2
+
+$no
+[1] 6</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-6-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-6-2-tab">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>g <span class="op">=</span> ig.Graph.Adjacency(bigmat)</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>blks <span class="op">=</span> g.connected_components(mode <span class="op">=</span> <span class="st">'weak'</span>)</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="bu">vars</span>(blks)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>{'_membership': [0, 1, 2, 3, 4, 5, 4, 3, 4, 5, 4], '_len': 6, '_graph': &lt;igraph.Graph object at 0x7fe3237df740&gt;, '_modularity': None, '_modularity_dirty': True, '_modularity_params': {}}</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>These results indicate 6 blocks in the covariance matrix, some of which are of size 1. The blocks of size 1 indicate standalone variables, which could receive inverse gamma (or other) priors on variances.</p>
+<p>To examine whether or not the blocks are fully unrestricted, we permute the rows and columns of our matrix:</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-7-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-7-1" role="tab" aria-controls="tabset-7-1" aria-selected="true">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-7-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-7-2" role="tab" aria-controls="tabset-7-2" aria-selected="false">Python</a></li></ul>
+<div class="tab-content">
+<div id="tabset-7-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-7-1-tab">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>reorder <span class="ot">&lt;-</span> <span class="fu">order</span>(blks<span class="sc">$</span>membership)</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>bigmat[reorder, reorder]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                      
+ 1 0 0 0 0 0 0 0 0 0 0
+ 0 1 0 0 0 0 0 0 0 0 0
+ 0 0 1 0 0 0 0 0 0 0 0
+ 0 0 0 1 1 0 0 0 0 0 0
+ 0 0 0 1 1 0 0 0 0 0 0
+ 0 0 0 0 0 1 1 1 0 0 0
+ 0 0 0 0 0 1 1 0 1 0 0
+ 0 0 0 0 0 1 0 1 1 0 0
+ 0 0 0 0 0 0 1 1 1 0 0
+ 0 0 0 0 0 0 0 0 0 1 1
+ 0 0 0 0 0 0 0 0 0 1 1</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-7-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-7-2-tab">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>reorder <span class="op">=</span> np.argsort(blks.membership)</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(bigmat[reorder][:, reorder])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[1. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]
+ [0. 1. 0. 0. 0. 0. 0. 0. 0. 0. 0.]
+ [0. 0. 1. 0. 0. 0. 0. 0. 0. 0. 0.]
+ [0. 0. 0. 1. 1. 0. 0. 0. 0. 0. 0.]
+ [0. 0. 0. 1. 1. 0. 0. 0. 0. 0. 0.]
+ [0. 0. 0. 0. 0. 1. 1. 1. 0. 0. 0.]
+ [0. 0. 0. 0. 0. 1. 1. 0. 1. 0. 0.]
+ [0. 0. 0. 0. 0. 1. 0. 1. 1. 0. 0.]
+ [0. 0. 0. 0. 0. 0. 1. 1. 1. 0. 0.]
+ [0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 1.]
+ [0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 1.]]</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>The output shows two <span class="math inline">\(2 \times 2\)</span> blocks that are unrestricted, but there remains a <span class="math inline">\(4 \times 4\)</span> block with some covariances fixed to 0:</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-8-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-8-1" role="tab" aria-controls="tabset-8-1" aria-selected="true">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-8-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-8-2" role="tab" aria-controls="tabset-8-2" aria-selected="false">Python</a></li></ul>
+<div class="tab-content">
+<div id="tabset-8-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-8-1-tab">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>bigmat[reorder, reorder][<span class="dv">6</span><span class="sc">:</span><span class="dv">9</span>, <span class="dv">6</span><span class="sc">:</span><span class="dv">9</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>        
+ 1 1 1 0
+ 1 1 0 1
+ 1 0 1 1
+ 0 1 1 1</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-8-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-8-2-tab">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(bigmat[reorder][:, reorder][<span class="dv">5</span>:<span class="dv">9</span>][:, <span class="dv">5</span>:<span class="dv">9</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[1. 1. 1. 0.]
+ [1. 1. 0. 1.]
+ [1. 0. 1. 1.]
+ [0. 1. 1. 1.]]</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>We need to specially consider the prior distribution for this <span class="math inline">\(4 \times 4\)</span> block due to the 0 restrictions. But the priors for the other seven rows and columns are “easy” because they are unrestricted.</p>
+<p>Even though we were not able to permute this matrix to have fully unrestricted blocks, we have reduced the dimension of the problematic block from 11 to 4. We are likely to see improvements in the computational efficiency of MCMC methods due to this reduced dimension.</p>
 </section>
-<section id="conclusion" class="level2">
-<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
-<p>A good deal of recent attention has been devoted to errors in academic articles. While the focus is often on statistical methodology, cheating, and experimental design, a more mundane source of errors involves outdated and incoherent results. These happen when one part of a project changes, the changes have further implications for downstream results, and the researcher doesn’t fully realize or address the further implications. I speculate that these mundane errors are common because, when the goal is to publish as quickly as possible, errors are bound to slip through the cracks. In this context, we could view <em>targets</em> as an extra research assistant who double-checks that all project results are up to date.</p>
-<p>Like other software tools, you have to invest some time in setting up <em>targets</em> for a project. You need to create the <code>_targets.R</code> file, which defines all the targets/steps of one’s project. I also found it helpful to put free-standing code inside functions so that the code can be called more easily. These extra steps will undoubtedly deter some researchers from regularly using <em>targets</em>, and it may not be worth it for some short-term analyses. But the <em>targets</em> setup is like compounding interest for project efficiency, making your life easier as the project drags on through journal submissions, rejections, revisions, and resubmissions.</p>
+<section id="summary" class="level2">
+<h2 class="anchored" data-anchor-id="summary">Summary</h2>
+<p>Connectivity is a well known concept in graph theory, and it is not really surprising that it can be applied to covariance matrices. This post shows exactly how the covariance matrix can be translated to a graph, which then opens the door to connectivity. Under this representation, we can easily see whether our matrix is block diagonal. This information can then be used to automatically determine appropriate prior distributions for the covariance matrix.</p>
 </section>
 <section id="license" class="level2">
 <h2 class="anchored" data-anchor-id="license">License</h2>
@@ -380,12 +682,16 @@ div.csl-indent {
 </section>
 <section id="computing-environment" class="level2">
 <h2 class="anchored" data-anchor-id="computing-environment">Computing Environment</h2>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-9-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-9-1" role="tab" aria-controls="tabset-9-1" aria-selected="true">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-9-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-9-2" role="tab" aria-controls="tabset-9-2" aria-selected="false">Python</a></li></ul>
+<div class="tab-content">
+<div id="tabset-9-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-9-1-tab">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>R version 4.3.2 (2023-10-31)
-Platform: x86_64-pc-linux-gnu (64-bit)
-Running under: Ubuntu 22.04.4 LTS
+<pre><code>R version 4.4.3 (2025-02-28)
+Platform: x86_64-pc-linux-gnu
+Running under: Ubuntu 22.04.5 LTS
 
 Matrix products: default
 BLAS:   /usr/lib/x86_64-linux-gnu/atlas/libblas.so.3.10.3 
@@ -406,18 +712,37 @@ attached base packages:
 [1] stats     graphics  grDevices datasets  utils     methods   base     
 
 other attached packages:
-[1] targets_1.3.2
+[1] igraph_2.1.4
 
 loaded via a namespace (and not attached):
- [1] vctrs_0.6.5       cli_3.6.2         knitr_1.45        rlang_1.1.3      
- [5] xfun_0.42         processx_3.8.3    jsonlite_1.8.8    data.table_1.15.0
- [9] glue_1.7.0        backports_1.4.1   htmltools_0.5.7   ps_1.7.6         
-[13] fansi_1.0.6       rmarkdown_2.25    evaluate_0.23     tibble_3.2.1     
-[17] base64url_1.4     fastmap_1.1.1     yaml_2.3.8        lifecycle_1.0.4  
-[21] compiler_4.3.2    codetools_0.2-19  igraph_2.0.2      htmlwidgets_1.6.4
-[25] pkgconfig_2.0.3   digest_0.6.34     R6_2.5.1          tidyselect_1.2.0 
-[29] utf8_1.2.4        pillar_1.9.0      callr_3.7.5       magrittr_2.0.3   
-[33] tools_4.3.2       bspm_0.5.5       </code></pre>
+ [1] digest_0.6.37       fastmap_1.2.0       xfun_0.51          
+ [4] Matrix_1.7-2        lattice_0.22-6      magrittr_2.0.3     
+ [7] reticulate_1.41.0.1 bspm_0.5.5          knitr_1.49         
+[10] pkgconfig_2.0.3     htmltools_0.5.8.1   png_0.1-8          
+[13] rmarkdown_2.29      lifecycle_1.0.4     cli_3.6.4          
+[16] grid_4.4.3          compiler_4.4.3      tools_4.4.3        
+[19] evaluate_1.0.3      Rcpp_1.0.14         yaml_2.3.10        
+[22] rlang_1.1.5         jsonlite_1.9.1      htmlwidgets_1.6.4  </code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-9-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-9-2-tab">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> session_info</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>session_info.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>-----
+igraph              0.11.8
+numpy               2.2.4
+session_info        1.0.0
+-----
+Python 3.10.12 (main, Feb  4 2025, 14:57:36) [GCC 11.4.0]
+Linux-5.15.0-126-generic-x86_64-with-glibc2.35
+-----
+Session information updated at 2025-03-20 17:19</code></pre>
+</div>
+</div>
+</div>
 </div>
 </div>
 </section>
@@ -429,22 +754,25 @@ loaded via a namespace (and not attached):
 </section>
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
-<div id="ref-tarchetypes" class="csl-entry" role="listitem">
-Landau, William Michael. 2021a. <em><span class="nocase">tarchetypes: Archetypes</span> for Targets</em>.
+<div id="ref-igraph2" class="csl-entry" role="listitem">
+Csárdi, Gábor, and Tamás Nepusz. 2006. <span>“The <span class="nocase">igraph</span> Software Package for Complex Network Research.”</span> <em>InterJournal</em> Complex Systems: 1695. <a href="https://igraph.org">https://igraph.org</a>.
 </div>
-<div id="ref-targets" class="csl-entry" role="listitem">
-———. 2021b. <span>“The <span class="nocase">targets R</span> Package: <span>A</span> Dynamic <span class="nocase">Make-like</span> Function-Oriented Pipeline Toolkit for Reproducibility and High-Performance Computing.”</span> <em>Journal of Open Source Software</em> 6 (57): 2959. <a href="https://doi.org/10.21105/joss.02959">https://doi.org/10.21105/joss.02959</a>.
+<div id="ref-igraph" class="csl-entry" role="listitem">
+Csárdi, Gábor, Tamás Nepusz, Vincent Traag, Szabolcs Horvát, Fabio Zanini, Daniel Noom, and Kirill Müller. 2025. <em><span class="nocase">igraph</span>: Network Analysis and Visualization in <span>R</span></em>. <a href="https://doi.org/10.5281/zenodo.7682609">https://doi.org/10.5281/zenodo.7682609</a>.
 </div>
-</div></section><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{merkle2024,
+<div id="ref-merkle2023opaque" class="csl-entry" role="listitem">
+Merkle, Edgar C., Oludare Ariyo, Sonja D. Winter, and Mauricio Garnier-Villarreal. 2023. <span>“Opaque Prior Distributions in <span>Bayesian</span> Latent Variable Models.”</span> <em>Methodology</em> 19: 228–55. <a href="https://doi.org/10.5964/meth.11167">https://doi.org/10.5964/meth.11167</a>.
+</div>
+</div></section><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{merkle2025,
   author = {Merkle, Edgar C.},
-  title = {The *Targets* Package for Academic Research},
-  date = {2024-02-29},
-  url = {https://ecmerkle.github.io/cs/targets.html},
+  title = {Finding Blocks in Covariance Matrices},
+  date = {2025-03-20},
+  url = {https://ecmerkle.github.io/cs/blockmat.html},
   langid = {en}
 }
-</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-merkle2024" class="csl-entry quarto-appendix-citeas" role="listitem">
-Merkle, Edgar C. 2024. <span>“The *Targets* Package for Academic
-Research.”</span> February 29, 2024. <a href="https://ecmerkle.github.io/cs/targets.html">https://ecmerkle.github.io/cs/targets.html</a>.
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-merkle2025" class="csl-entry quarto-appendix-citeas" role="listitem">
+Merkle, Edgar C. 2025. <span>“Finding Blocks in Covariance
+Matrices.”</span> March 20, 2025. <a href="https://ecmerkle.github.io/cs/blockmat.html">https://ecmerkle.github.io/cs/blockmat.html</a>.
 </div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {

@@ -20,6 +20,8 @@ website:
           text: targets package
         - href: cs/propodds.qmd
           text: Proportional odds
+        - href: cs/blockmat.qmd
+          text: Blocks in covariance matrices
       - href: consult.qmd
         text: Consulting
     right:

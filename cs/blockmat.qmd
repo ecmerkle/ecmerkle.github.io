@@ -80,7 +80,7 @@ origmat
 
 ```{python}
 import numpy as np
-origmat
+print(origmat)
 ```
 
 :::
@@ -98,7 +98,7 @@ origmat[c(1,2,4,3,5), c(1,2,4,3,5)]
 ## Python
 
 ```{python}
-origmat[[0,1,3,2,4]][:, [0,1,3,2,4]]
+print(origmat[[0,1,3,2,4]][:, [0,1,3,2,4]])
 ```
 
 :::
@@ -111,7 +111,7 @@ For a time, I wasn't sure how to automate this. I could have coded something mys
 
 I found an answer in the graph theory concept of [*connectivity*](https://en.wikipedia.org/wiki/Connectivity_(graph_theory)). In short, we treat each unrestricted entry of the covariance matrix as an undirected edge in a graph. We then search for the *connected components* of the graph. Each component is a block of the covariance matrix. We can then determine whether or not each block is unrestricted.
 
-Functionality for doing this comes from the *igraph* package [@igraph]. Below, we create a graph of our covariance matrix, where each free parameter is an undirected edge. The `components()` function then finds blocks of the covariance matrix; in network language, these are the maximal connected components of the graph.
+Functionality for doing this comes from the *igraph* package [@igraph2; @igraph]. Below, we create a graph of our covariance matrix, where each free parameter is an undirected edge. The `components()` function then finds blocks of the covariance matrix; in network language, these are the maximal connected components of the graph.
 
 ::: {.panel-tabset}
 
@@ -150,7 +150,7 @@ order(blks$membership)
 ## Python
 
 ```{python}
-np.argsort(blks.membership)
+print(np.argsort(blks.membership))
 ```
 
 :::
@@ -167,7 +167,7 @@ bigmat
 
 ## Python
 ```{python}
-bigmat
+print(bigmat)
 ```
 
 :::
@@ -214,7 +214,7 @@ bigmat[reorder, reorder]
 ## Python
 ```{python}
 reorder = np.argsort(blks.membership)
-bigmat[reorder][:, reorder]
+print(bigmat[reorder][:, reorder])
 ```
 
 :::
@@ -230,7 +230,7 @@ bigmat[reorder, reorder][6:9, 6:9]
 
 ## Python
 ```{python}
-bigmat[reorder][:, reorder][5:9][:, 5:9]
+print(bigmat[reorder][:, reorder][5:9][:, 5:9])
 ```
 
 :::
