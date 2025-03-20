@@ -1,0 +1,279 @@
+---
+title: "Finding blocks in covariance matrices"
+description: |
+  Given a covariance matrix with some covariances fixed to 0, is it possible to permute the rows and columns so that the matrix is block diagonal? In this post, we consider an automated method for answering this question.
+date: 2025-03-20
+categories:
+  - covariance matrix
+  - positive definite
+  - graph theory
+  - statistics
+  - R
+  - Python
+  - igraph
+citation:
+  url: https://ecmerkle.github.io/cs/blockmat.html
+  citation-label: "merkle25b"
+  issued: 2025-03-20
+  available-date: 2025-03-20
+bibliography:
+  - ../../blavaan/vignettes/refs.bib
+format: html
+---
+
+
+```{python, include=FALSE}
+import numpy as np
+import igraph as ig
+```
+
+Given a covariance matrix with some covariances fixed to 0, is it possible to permute the rows and columns so that the matrix is block diagonal? This question is important in [Bayesian latent variable modeling](https://ecmerkle.github.io/blavaan/) and elsewhere, because it influences the prior distributions that we can use. To be specific, if our covariance matrix consists of unrestricted blocks, then the 0 entries don't really matter. We can specify an inverse Wishart or LKJ or other prior on each block of the covariance matrix. On the other hand, if our covariance matrix does not consist of unrestricted blocks, then the prior distribution becomes complicated [e.g., @merkle2023opaque]. This is because the possible values of unrestricted covariances are influenced by the zero entries, along with the constraint that the entire covariance matrix is positive definite.
+
+
+```{python, include = FALSE}
+mat = np.ones((5,5))
+mat[0:3, 3:5] = 0
+mat[3:5, 0:3] = 0
+ord = [0, 2, 4, 1, 3]
+origmat = mat[ord][:, ord]
+
+bigmat = np.zeros((11,11))
+np.fill_diagonal(bigmat, 1)
+bigmat[3,7] = bigmat[7,3] = bigmat[4,6] = bigmat[6,4] = 1
+bigmat[4,8] = bigmat[8,4] = bigmat[5,9] = bigmat[9,5] = 1
+bigmat[6,10] = bigmat[10,6] = bigmat[8,10] = bigmat[10,8] = 1
+```
+
+```{r, include = FALSE}
+## set up matrix
+mat <- matrix(1, 5, 5)
+rownames(mat) <- colnames(mat) <- rep("", 5)
+diag(mat) <- 1
+mat[4:5,1:3] <- mat[1:3,4:5] <- 0
+ord <- c(1, 3, 5, 2, 4)
+labs <- rep("", 5)
+origmat <- mat[ord, ord]
+
+## set up big matrix
+bigmat <- matrix(0, 11, 11)
+bigmat[4,8] <- bigmat[5,7] <- bigmat[5,9] <- 1
+bigmat[6,10] <- bigmat[7,11] <- bigmat[9,11] <- 1
+bigmat <- bigmat + t(bigmat)
+diag(bigmat) <- 1
+rownames(bigmat) <- colnames(bigmat) <- rep("", 11)
+bigmat[bigmat > 0] <- 1
+```
+
+
+## Example
+To make this more concrete, let's consider the correlation matrix below.
+
+::: {.panel-tabset}
+
+## R
+
+```{r}
+origmat
+```
+
+## Python
+
+```{python}
+import numpy as np
+origmat
+```
+
+:::
+
+The entries of 0 are fixed to 0, and the entries of 1 are free parameters. For most of us, it is not clear whether or not this is a block diagonal matrix. But if we reorder the rows and columns so that the first, second, and fourth come first, followed by the third and fifth, we obtain:
+
+::: {.panel-tabset}
+
+## R
+
+```{r}
+origmat[c(1,2,4,3,5), c(1,2,4,3,5)]
+```
+
+## Python
+
+```{python}
+origmat[[0,1,3,2,4]][:, [0,1,3,2,4]]
+```
+
+:::
+
+which is a block diagonal matrix. We now know we can use one prior distribution on the block in rows/columns one to three, and a separate prior distribution on the block in rows/columns four to five. In general, we want to automatically permute the rows and columns to block diagonal form where possible. This is because we can't be sure that the matrix will be pre-specified in block diagonal form.
+
+
+## Automation
+For a time, I wasn't sure how to automate this. I could have coded something myself, but I was pretty sure that I would be re-inventing the wheel.
+
+I found an answer in the graph theory concept of [*connectivity*](https://en.wikipedia.org/wiki/Connectivity_(graph_theory)). In short, we treat each unrestricted entry of the covariance matrix as an undirected edge in a graph. We then search for the *connected components* of the graph. Each component is a block of the covariance matrix. We can then determine whether or not each block is unrestricted.
+
+Functionality for doing this comes from the *igraph* package [@igraph]. Below, we create a graph of our covariance matrix, where each free parameter is an undirected edge. The `components()` function then finds blocks of the covariance matrix; in network language, these are the maximal connected components of the graph.
+
+::: {.panel-tabset}
+
+## R
+
+```{r, message = FALSE}
+library("igraph")
+
+g <- graph_from_adjacency_matrix(origmat, mode = "undirected")
+blks <- components(g)
+blks
+```
+
+## Python
+
+```{python}
+import igraph as ig
+
+g = ig.Graph.Adjacency(origmat)
+blks = g.connected_components(mode = 'weak')
+vars(blks)
+```
+
+:::
+
+The `membership` entry of the results shows that rows 1, 2, and 4 belong to one block, and rows 3 and 5 belong to the other block. After that, we see that the first block contains 3 variables and the second block contains 2 variables. We can reorder the covariance matrix using this membership information, via
+
+::: {.panel-tabset}
+
+## R
+
+```{r}
+order(blks$membership)
+```
+
+## Python
+
+```{python}
+np.argsort(blks.membership)
+```
+
+:::
+
+## Larger Example
+Let's consider a larger example with an $11 \times 11$ matrix. Again, entries of 0 are fixed to 0 and entries of 1 are free parameters.
+
+::: {.panel-tabset}
+
+## R
+```{r}
+bigmat
+```
+
+## Python
+```{python}
+bigmat
+```
+
+:::
+
+Here is the same matrix with just the 1s, so that it is easier to see the free entries:
+```{r, echo = FALSE}
+newmat <- bigmat
+newmat[newmat == 0] <- ""
+prmatrix(newmat, quote = FALSE)
+```
+
+The free entries look structured, but it is not clear whether this could be a block diagonal matrix. So we examine connectivity:
+
+::: {.panel-tabset}
+
+## R
+```{r}
+g <- graph_from_adjacency_matrix(bigmat, mode = "undirected")
+blks <- components(g)
+blks
+```
+
+## Python
+```{python}
+g = ig.Graph.Adjacency(bigmat)
+blks = g.connected_components(mode = 'weak')
+vars(blks)
+```
+
+:::
+
+These results indicate 6 blocks in the covariance matrix, some of which are of size 1. The blocks of size 1 indicate standalone variables, which could receive inverse gamma (or other) priors on variances.
+
+To examine whether or not the blocks are fully unrestricted, we permute the rows and columns of our matrix:
+
+::: {.panel-tabset}
+
+## R
+```{r}
+reorder <- order(blks$membership)
+bigmat[reorder, reorder]
+```
+
+## Python
+```{python}
+reorder = np.argsort(blks.membership)
+bigmat[reorder][:, reorder]
+```
+
+:::
+
+The output shows two $2 \times 2$ blocks that are unrestricted, but there remains a $4 \times 4$ block with some covariances fixed to 0:
+
+::: {.panel-tabset}
+
+## R
+```{r}
+bigmat[reorder, reorder][6:9, 6:9]
+```
+
+## Python
+```{python}
+bigmat[reorder][:, reorder][5:9][:, 5:9]
+```
+
+:::
+
+We need to specially consider the prior distribution for this $4 \times 4$ block due to the 0 restrictions. But the priors for the other seven rows and columns are "easy" because they are unrestricted.
+
+Even though we were not able to permute this matrix to have fully unrestricted blocks, we have reduced the dimension of the problematic block from 11 to 4. We are likely to see improvements in the computational efficiency of MCMC methods due to this reduced dimension.
+
+
+
+## Summary
+Connectivity is a well known concept in graph theory, and it is not really surprising that it can be applied to covariance matrices. This post shows exactly how the covariance matrix can be translated to a graph, which then opens the door to connectivity. Under this representation, we can easily see whether our matrix is block diagonal. This information can then be used to automatically determine appropriate prior distributions for the covariance matrix.
+
+
+## License
+The code on this page is copyrighted by Edgar Merkle and licensed under the GPLv3 license:
+
+[https://www.gnu.org/licenses/gpl-3.0.en.html](https://www.gnu.org/licenses/gpl-3.0.en.html)
+
+The text and figures on this page are copyrighted by Edgar Merkle and licensed under the CC BY-NC 4.0 license:
+
+[https://creativecommons.org/licenses/by-nc/4.0/](https://creativecommons.org/licenses/by-nc/4.0/)
+
+
+## Computing Environment
+
+::: {.panel-tabset}
+
+## R
+
+```{r cenv}
+sessionInfo()
+```
+
+## Python
+
+```{python}
+import session_info
+session_info.show()
+```
+
+:::
+
+
+## References
+
