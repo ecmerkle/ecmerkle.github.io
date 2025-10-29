@@ -251,7 +251,7 @@ R., Budescu, D. V., Yates, J. F., Sieck, W. R., Arkes, H. R., Argenta,
 C. F., Shin, Y., & Carter, J. N. (2012). [The aggregative contingent
 estimation system: Selecting, rewarding, and training experts in a
 wisdom of crowds approach to
-forecasting](http://www.aaai.org/ocs/index.php/SSS/SSS12/paper/view/4290).
+forecasting](https://aaai.org/papers/04290-4290-the-aggregative-contingent-estimation-system-selecting-rewarding-and-training-experts-in-a-wisdom-of-crowds-approach-to-forecasting/).
 In *Proceedings of the 2012 Association for the Advancement of
 Artificial Intelligence Spring Symposium Series (AAAI Technical Report
 SS-12-06)* (pp. 75--76).
