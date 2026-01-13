@@ -13,7 +13,7 @@ resources:
 
 Merkle, E. C., Petrov, N., Zhu, S. M., Karger, E., Tetlock, P. E., & Himmelstein, M. (preprint). [Identifying good forecasters via adaptive cognitive tests](https://arxiv.org/abs/2411.11126).
 
-Merkle, E. C., Winter, S. D., & Fitzsimmons, E. (in press). [Identification and scaling of latent variables in ordinal factor analysis](https://arxiv.org/abs/2501.06094). *Psychometrika*.
+Merkle, E. C., Winter, S. D., & Fitzsimmons, E. (in press). [Identification and scaling of latent variables in ordinal factor analysis](https://doi.org/10.1017/psy.2026.10084). *Psychometrika*.
 
 Benvenuti, M. C., Merkle, E. C., & McCarthy, D. M. (2025). Physical context of alcohol use and craving: An EMA exploratory study. *Addictive Behaviors, 170*, 108450. (DOI: [10.1016/j.addbeh.2025.108450](https://doi.org/10.1016/j.addbeh.2025.108450))
 
