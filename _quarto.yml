@@ -32,6 +32,9 @@ website:
         href: https://mastodon.sdf.org/@edgarmerkle
       - icon: github
         href: https://github.com/ecmerkle
+      - icon: moon
+        href: "#"
+        id: quarto-dark-toggle
 
 format:
   html:
