@@ -11,6 +11,8 @@ resources:
 
 <!-- the above resources keep the files on the site, otherwise they are erased because they are only referred to in the blavaan repo -->
 
+Pfadt, J. M., Merkle, E. C., & Wagenmakers, E.-J. (preprint). [Bayes factors for structural equation models with bridge sampling and blavaan](https://doi.org/10.31234/osf.io/pt2bc_v1).
+
 Merkle, E. C., Petrov, N., Zhu, S. M., Karger, E., Tetlock, P. E., & Himmelstein, M. (preprint). [Identifying good forecasters via adaptive cognitive tests](https://arxiv.org/abs/2411.11126).
 
 Merkle, E. C. (2026). [Nuances of information criteria for Bayesian psychometric models](https://doi.org/10.23668/psycharchives.21756). *Methodology*.
