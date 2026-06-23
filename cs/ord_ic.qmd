@@ -150,7 +150,7 @@ fit <- bcfa(HS.model, data=Data, sample=500, burnin=500, ordered=TRUE, std.lv=TR
 #### Conditional Log-Likelihood
 From here, we need to use a few *blavaan* functions that are not exported (because we don't expect users to routinely need them). We will extract the first posterior sample (including latent variables), then compute casewise likelihoods for that posterior sample. We start with likelihoods that are conditional on $\boldsymbol{\eta}_i$, which are easier. Then we move to marginal likelihoods.
 
-Conditional likelihoods can be computed using the non-exported function `get_ll()`, as below.
+Conditional likelihoods can be computed using the non-exported function `get_ll()`, as below. *Note (June 2026): the code below sums log-likelihoods within each individual/case, resulting in a single log-likelihood value for each individual. This summing would not be neeeded if one were computing an information criterion using the conditional log-likelihoods.)*
 
 ```{r condlik}
 ## all posterior samples
