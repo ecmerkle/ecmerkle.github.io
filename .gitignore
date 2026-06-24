@@ -5,3 +5,5 @@ _site
 vendor
 
 /.quarto/
+
+**/*.quarto_ipynb
