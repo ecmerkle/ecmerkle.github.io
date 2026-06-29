@@ -17,7 +17,7 @@ Merkle, E. C., Petrov, N., Zhu, S. M., Karger, E., Tetlock, P. E., & Himmelstein
 
 Merkle, E. C. (2026). [Bayesian estimation of normal and probit psychometric models](https://doi.org/10.1017/psy.2026.10119). *Psychometrika*. (DOI: [10.1017/psy.2026.10119](https://doi.org/10.1017/psy.2026.10119))
 
-Luo, X., Dong, J., Liu, H., Liu, Y., & Merkle, E. C. (2026). Bayesian evaluation for latent variable models: A tutorial on computing information criteria and bayes factors with the R package bleval. *Psychological Methods*. (DOI: [10.1037/met0000852](https://doi.org/10.1037/met0000852))
+Luo, X., Dong, J., Liu, H., Liu, Y., & Merkle, E. C. (2026). Bayesian evaluation for latent variable models: A tutorial on computing information criteria and Bayes factors with the R package bleval. *Psychological Methods*. (DOI: [10.1037/met0000852](https://doi.org/10.1037/met0000852))
 
 Miller, M. B., Shoemaker, S. D., Freeman, L. K., Curtis, A. F., Merrill, J. E., & Merkle, E. C. (2026). Predictive value of real-time memory tests in identifying alcohol-induced blackouts in situ. *Addiction*. (DOI: [10.1111/add.70446](https://doi.org/10.1111/add.70446))
 
