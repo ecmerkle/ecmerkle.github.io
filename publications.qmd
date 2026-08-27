@@ -13,7 +13,7 @@ resources:
 
 Pfadt, J. M., Merkle, E. C., & Wagenmakers, E.-J. (preprint). [Bayes factors for structural equation models with bridge sampling and blavaan](https://doi.org/10.31234/osf.io/pt2bc_v1).
 
-Merkle, E. C., Petrov, N., Zhu, S. M., Karger, E., Tetlock, P. E., & Himmelstein, M. (preprint). [Identifying good forecasters via adaptive cognitive tests](https://arxiv.org/abs/2411.11126).
+Merkle, E. C., Petrov, N., Zhu, S. M., Karger, E., Tetlock, P. E., & Himmelstein, M. (in press). [Identifying good forecasters via adaptive cognitive tests](https://arxiv.org/abs/2411.11126). *International Journal of Forecasting*.
 
 Merkle, E. C. (2026). [Bayesian estimation of normal and probit psychometric models](https://doi.org/10.1017/psy.2026.10119). *Psychometrika*. (DOI: [10.1017/psy.2026.10119](https://doi.org/10.1017/psy.2026.10119))
 
