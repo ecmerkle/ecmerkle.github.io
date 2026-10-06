@@ -13,11 +13,11 @@ resources:
 
 Pfadt, J. M., Merkle, E. C., & Wagenmakers, E.-J. (preprint). [Bayes factors for structural equation models with bridge sampling and blavaan](https://doi.org/10.31234/osf.io/pt2bc_v1).
 
-Merkle, E. C., Petrov, N., Zhu, S. M., Karger, E., Tetlock, P. E., & Himmelstein, M. (in press). [Identifying good forecasters via adaptive cognitive tests](https://arxiv.org/abs/2411.11126). *International Journal of Forecasting*. (DOI: [10.1016/j.ijforecast.2026.08.006](https://doi.org/10.1016/j.ijforecast.2026.08.006))
-
-Merkle, E. C. (2026). [Bayesian estimation of normal and probit psychometric models](https://doi.org/10.1017/psy.2026.10119). *Psychometrika*. (DOI: [10.1017/psy.2026.10119](https://doi.org/10.1017/psy.2026.10119))
+Merkle, E. C., Petrov, N., Zhu, S. M., Karger, E., Tetlock, P. E., & Himmelstein, M. (2026). [Identifying good forecasters via adaptive cognitive tests](https://arxiv.org/abs/2411.11126). *International Journal of Forecasting*. (DOI: [10.1016/j.ijforecast.2026.08.006](https://doi.org/10.1016/j.ijforecast.2026.08.006))
 
 Luo, X., Dong, J., Liu, H., Liu, Y., & Merkle, E. C. (2026). Bayesian evaluation for latent variable models: A tutorial on computing information criteria and Bayes factors with the R package bleval. *Psychological Methods*. (DOI: [10.1037/met0000852](https://doi.org/10.1037/met0000852))
+
+Merkle, E. C. (2026). [Bayesian estimation of normal and probit psychometric models](https://doi.org/10.1017/psy.2026.10119). *Psychometrika, 91*, 1599--1625. (DOI: [10.1017/psy.2026.10119](https://doi.org/10.1017/psy.2026.10119))
 
 Merkle, E. C. (2026). [Nuances of information criteria for Bayesian psychometric models](https://doi.org/10.5964/meth.20361). *Methodology, 22*, 195--224. (DOI: [10.5964/meth.20361](https://doi.org/10.5964/meth.20361))
 
@@ -25,7 +25,7 @@ Miller, M. B., Shoemaker, S. D., Freeman, L. K., Curtis, A. F., Merrill, J. E., 
 
 Merkle, E. C., Winter, S. D., & Fitzsimmons, E. (2026). [Identification and scaling of latent variables in ordinal factor analysis](https://doi.org/10.1017/psy.2026.10084). *Psychometrika, 91*, 508--535. (DOI: [10.1017/psy.2026.10084](https://doi.org/10.1017/psy.2026.10084))
 
-Kırtıl, I. G., Çizel, B., & Merkle, E. C. (2026). Psychological determinants of tourist satisfaction: Insights from scuba diving tourism. *Journal of Vacation Marketing*. (DOI: [10.1177/13567667261425040](https://doi.org/10.1177/13567667261425040))
+Kırtıl, I. G., Çizel, B., & Merkle, E. C. (2026). Psychological determinants of tourist satisfaction: Insights from scuba diving tourism. *Journal of Vacation Marketing, 32*, 1045--1061. (DOI: [10.1177/13567667261425040](https://doi.org/10.1177/13567667261425040))
 
 Benvenuti, M. C., Merkle, E. C., & McCarthy, D. M. (2025). Physical context of alcohol use and craving: An EMA exploratory study. *Addictive Behaviors, 170*, 108450. (DOI: [10.1016/j.addbeh.2025.108450](https://doi.org/10.1016/j.addbeh.2025.108450))
 
