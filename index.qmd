@@ -19,7 +19,7 @@ My research involves a mix of psychometric modeling, statistical modeling, and t
 
 I am currently a professor at the University of Missouri, with primary affiliation in the Department of Psychological Sciences and adjunct affiliation in the Department of Statistics. I have published some papers in good journals and been involved in some big grants, and my code can be found in some beloved R packages. For papers, see the link at top. You might also look at:
 
-- [Code for reproducing results of many papers](http://semtools.r-forge.r-project.org/) (started around 2010, so it is old and looks that way!)
+- [Code for reproducing results of many papers](https://ecmerkle.codeberg.page/semtools/) (started around 2010, low on aesthetics)
 
 - [Google scholar](https://scholar.google.com/citations?user=LNVvgwQAAAAJ)
 
